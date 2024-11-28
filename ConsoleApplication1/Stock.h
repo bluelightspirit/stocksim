@@ -14,6 +14,7 @@ public:
 	void set_symbol(string given_symbol);
 	void set_price(double given_price);
 	void set_attributes(unordered_map<string, int> given_attributes);
+	void set_random_price();
 	// constructors
 	Stock();
 	Stock(double given_price);

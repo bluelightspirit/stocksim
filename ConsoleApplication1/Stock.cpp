@@ -30,6 +30,11 @@ void Stock::set_attributes(unordered_map<string, int> given_attributes)
 	attributes = given_attributes;
 }
 
+void Stock::set_random_price()
+{
+	price = rand();
+}
+
 Stock::Stock()
 {
 	symbol = "";

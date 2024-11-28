@@ -20,36 +20,52 @@ int main()
 	cout << commands << endl;
 	string command;
 	while (true) {
-		cout << "Enter a command here: ";
-		cin >> command;
 		if (command == "E") {
 			exit(0);
 		}
-		else {
-			if (command == "B") {
-				cout << "Buy a stock received" << endl;
+		cout << "Enter a command here: ";
+		cin >> command;
+		if (command == "B") {
+			cout << "Buy a stock received" << endl;
+			Stock newStock;
+			string new_command;
+			while (true) {
+				newStock.set_random_price();
+				cout << newStock.get_price() << " is the cost of some random stock.\nCommands:\nBuy (B)\nSkip (S)\nExit command loops(E)" << endl;
+				cin >> new_command;
+				if (new_command == "B") {
+					cout << "Bought" << endl;
+					break;
+				}
+				else if (new_command == "S") {
+					cout << "Skipping" << endl;
+				}
+				else if (new_command == "E") {
+					command = "E";
+					break;
+				}
 			}
-			else if (command == "S") {
-				cout << "Sell a stock received" << endl;
-			}
-			else if (command == "Dl") {
-				cout << "Display a list of available stocks received" << endl;
-			}
-			else if (command == "Dp") {
-				cout << "Display your portfolio received" << endl;
-			}
-			else if (command == "V") {
-				cout << "View your account balance received" << endl;
-			}
-			else if (command == "Md") {
-				cout << "Make a deposit received" << endl;
-			}
-			else if (command == "Mw") {
-				cout << "Make a withdrawal received" << endl;
-			}
-			else if (command == "H") {
-				cout << commands << endl;
-			}
+		}
+		else if (command == "S") {
+			cout << "Sell a stock received" << endl;
+		}
+		else if (command == "Dl") {
+			cout << "Display a list of available stocks received" << endl;
+		}
+		else if (command == "Dp") {
+			cout << "Display your portfolio received" << endl;
+		}
+		else if (command == "V") {
+			cout << "View your account balance received" << endl;
+		}
+		else if (command == "Md") {
+			cout << "Make a deposit received" << endl;
+		}
+		else if (command == "Mw") {
+			cout << "Make a withdrawal received" << endl;
+		}
+		else if (command == "H") {
+			cout << commands << endl;
 		}
 	}
 
