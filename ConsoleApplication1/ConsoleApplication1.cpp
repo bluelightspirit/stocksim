@@ -35,6 +35,10 @@ int main()
 				cin >> new_command;
 				if (new_command == "B") {
 					cout << "Bought" << endl;
+					trader.add_to_portfolio(newStock);
+					vector<Stock> new_portfolio = trader.get_portfolio();
+					Stock latest = new_portfolio[new_portfolio.size() - 1];
+					cout << "--- New Stock Received ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: " << latest.get_price() << endl;
 					break;
 				}
 				else if (new_command == "S") {

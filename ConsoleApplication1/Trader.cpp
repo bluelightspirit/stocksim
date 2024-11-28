@@ -1,4 +1,5 @@
 #include "Trader.h"
+#include "Stock.h"
 
 string Trader::get_name()
 {
@@ -10,7 +11,7 @@ double Trader::get_balance()
 	return balance;
 }
 
-vector<string> Trader::get_portfolio()
+vector<Stock> Trader::get_portfolio()
 {
 	return portfolio;
 }
@@ -25,7 +26,7 @@ void Trader::set_balance(double given_balance)
 	balance = given_balance;
 }
 
-void Trader::set_portfolio(vector<string> given_portfolio)
+void Trader::set_portfolio(vector<Stock> given_portfolio)
 {
 	portfolio = given_portfolio;
 }
@@ -34,19 +35,24 @@ Trader::Trader()
 {
 	name = "";
 	balance = NULL;
-	portfolio = vector<string>();
+	portfolio = vector<Stock>();
 }
 
 Trader::Trader(string given_name)
 {
 	name = given_name;
 	balance = NULL;
-	portfolio = vector<string>();
+	portfolio = vector<Stock>();
 }
 
-Trader::Trader(string given_name, double given_balance, vector<string> given_portfolio)
+Trader::Trader(string given_name, double given_balance, vector<Stock> given_portfolio)
 {
 	name = given_name;
 	balance = given_balance;
 	portfolio = given_portfolio;
+}
+
+void Trader::add_to_portfolio(Stock given_stock)
+{
+	portfolio.push_back(given_stock);
 }
