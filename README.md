@@ -15,18 +15,23 @@ After that, at the top left, press "File" then "Start Page"
 Then, at the top left again, press "File", hover over "Open", then press "Open from GitHub..."
 
 ![image](https://github.com/user-attachments/assets/8e3e2a72-0f21-4c42-adeb-2f8099ac75a7)
+
 Press "URL", select a directory and take note of that directory, then click the popup text box and in it, type in or paste "https://github.com/bluelightspirit/ConsoleApplication1" then after it is typed in, Press "Clone" at the bottom like this:
 
 ![image](https://github.com/user-attachments/assets/4b24fea1-6452-473f-b3f8-91b8040b2aaf)
+
 After that, press "File" at the top left, hover over "Open", then press "Project/Solution..."
 
 ![image](https://github.com/user-attachments/assets/abc46549-b392-43d4-9145-e770ff5baf9a)
+
 Then, locate the directory you took note of the previous step, open that folder, then open the .sln file.
 
 ![image](https://github.com/user-attachments/assets/5cf46912-24f5-4ba1-aea2-423082a51ec2)
+
 After that, press "Local Windows Debugger" at the top middle of Visual Studio.
 
 ![image](https://github.com/user-attachments/assets/4c155a50-3775-498a-942e-c5b8c4b26e1c)
+
 Lastly, locate your command prompt popup and open it which should display something like this:
 
 ![image](https://github.com/user-attachments/assets/8dcba8e9-ce53-4cc0-8b8e-71c47d7ee12d)
