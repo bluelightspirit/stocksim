@@ -3,6 +3,7 @@
 #include <vector>
 #include "Stock.h"
 using namespace std;
+// the Trader class represents a corporation, market, or person who buys/sells stocks from the Stock class with a balance of how much money they have on top of that
 class Trader
 {
 public:

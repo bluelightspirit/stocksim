@@ -3,6 +3,7 @@
 #include <vector>
 #include <unordered_map>
 using namespace std;
+// the Stock class represents a thing traders can buy and sell worth a certain price that could go up or down
 class Stock
 {
 public:
