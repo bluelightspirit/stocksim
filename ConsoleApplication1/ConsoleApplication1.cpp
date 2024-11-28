@@ -2,10 +2,19 @@
 //
 
 #include <iostream>
+#include <string>
+#include "Stock.h"
+#include "Trader.h"
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	string trader_name;
+    std::cout << "Hello trader!\n";
+	cout << "Enter your name here: ";
+	cin >> trader_name;
+	Trader trader(trader_name);
+	cout << trader.get_name();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
