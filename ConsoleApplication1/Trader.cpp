@@ -91,3 +91,15 @@ void Trader::sell_from_portfolio(int position)
 	portfolio[position] = end;
 	portfolio.pop_back();
 }
+
+// withdraw certain amount of money removing from balance
+void Trader::withdraw(double amount)
+{
+	balance -= amount;
+}
+
+// deposit certain amount of money adding to balance
+void Trader::deposit(double amount)
+{
+	balance += amount;
+}

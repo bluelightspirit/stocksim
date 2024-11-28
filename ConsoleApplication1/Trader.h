@@ -22,6 +22,8 @@ public:
 // adders and removers
 	void add_to_portfolio(Stock given_stock); // add Stock to portfolio vector
 	void sell_from_portfolio(int position); // remove Stock from portfolio vector
+	void withdraw(double amount); // withdraw certain amount of money removing from balance
+	void deposit(double amount); // deposit certain amount of money adding to balance
 	
 private:
 	// main variables
