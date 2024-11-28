@@ -9,6 +9,8 @@
 using namespace std;
 
 // flat functions that don't require special global variables for less repetition
+
+// display stocks a trader has in reverse order
 bool display_stocks(Trader trader) {
 	vector<Stock> new_portfolio = trader.get_portfolio();
 	int i = new_portfolio.size() - 1;
@@ -24,23 +26,29 @@ bool display_stocks(Trader trader) {
 	return true;
 }
 
+// main method to run command prompt for now. maybe not allowed for HCI so is temporary for now, but good start?
 int main()
 {
+	// traders name
 	string trader_name;
 	cout << "Hello trader!\n";
 	cout << "Enter your name here: ";
 	cin >> trader_name;
 	Trader trader(trader_name);
 	cout << "Your trader name is: " << trader.get_name() << endl;
+	// commands for user to enter
 	string commands = "Commands (Case sensitive):\nBuy a stock (B)\nSell a stock (S)\nDisplay a list of available stocks (Dl)\nDisplay your portfolio (Dp)\nView Account Balance (V)\nMake a Deposit (Md)\nMake a Withdrawal (Mw)\nHelp (H)\nExit (E)";
 	cout << commands << endl;
 	string command;
 	while (true) {
+		// exit if command is E
 		if (command == "E") {
 			exit(0);
 		}
+		// ask for command input from user and take it in
 		cout << "Enter a command here: ";
 		cin >> command;
+		// if command is B, give optinos to buy or skip stocks, or exit
 		if (command == "B") {
 			cout << "Buy a stock received" << endl;
 			Stock newStock;
