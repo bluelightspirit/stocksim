@@ -91,8 +91,7 @@ int main()
 			display_stocks(trader);
 		}
 		else if (command == "V") {
-			cout << "Here is your balance:" << endl;
-			cout << trader.get_balance() << endl;
+			cout << "View your account balance received" << endl;
 		}
 		else if (command == "Md") {
 			cout << "Make a deposit received" << endl;

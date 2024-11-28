@@ -17,6 +17,7 @@ public:
 	void set_random_price();
 	// constructors
 	Stock();
+	Stock(string given_symbol);
 	Stock(double given_price);
 	Stock(double given_price, unordered_map<string, int> given_attributes);
 	Stock(string given_symbol, double given_price, unordered_map<string, int> given_attributes);

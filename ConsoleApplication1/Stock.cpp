@@ -42,6 +42,13 @@ Stock::Stock()
 	attributes = unordered_map<string, int>();
 }
 
+Stock::Stock(string given_symbol)
+{
+	symbol = given_symbol;
+	price = NULL;
+	attributes = unordered_map<string, int>();
+}
+
 
 Stock::Stock(double given_price)
 {

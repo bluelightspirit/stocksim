@@ -56,3 +56,19 @@ void Trader::add_to_portfolio(Stock given_stock)
 {
 	portfolio.push_back(given_stock);
 }
+
+void Trader::sell_from_portfolio(int position)
+{
+	if (portfolio.size() - 1 < 0) {
+		portfolio.pop_back();
+		return;
+	}
+	if (portfolio.size() - 1 == position) {
+		portfolio.pop_back();
+		return;
+	}
+	Stock end = portfolio[portfolio.size() - 1];
+	Stock pos = portfolio[position];
+	portfolio[position] = end;
+	portfolio.pop_back();
+}

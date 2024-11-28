@@ -18,8 +18,9 @@ public:
 	Trader();
 	Trader(string given_name);
 	Trader(string given_name, double given_balance, vector<Stock> given_portfolio);
-// adders
+// adders and removers
 	void add_to_portfolio(Stock given_stock);
+	void sell_from_portfolio(int position);
 	
 private:
 	// main variables
