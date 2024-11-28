@@ -32,7 +32,7 @@ void Stock::set_attributes(unordered_map<string, int> given_attributes)
 
 void Stock::set_random_price()
 {
-	price = rand();
+	set_price(rand());
 }
 
 Stock::Stock()
