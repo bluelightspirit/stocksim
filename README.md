@@ -23,6 +23,3 @@ To use the stock market simulator, type in a name, then it gives you commands to
 ![image](https://github.com/user-attachments/assets/e82f828f-7d4f-4183-a859-97caea366056)
 ## Compiling
 This program uses solely C++ to compile.
-
-
-L
