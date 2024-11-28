@@ -9,17 +9,19 @@
 using namespace std;
 
 // flat functions that don't require special global variables for less repetition
-void display_stocks(Trader trader) {
+bool display_stocks(Trader trader) {
 	vector<Stock> new_portfolio = trader.get_portfolio();
 	int i = new_portfolio.size() - 1;
 	if (i < 0) {
 		cout << "You have no stocks!" << endl;
+		return false;
 	}
 	while (i >= 0) {
 		Stock latest = new_portfolio[i];
 		cout << "--- Stock #" << i+1 << " ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: " << latest.get_price() << "\n---------------" << endl;
 		i--;
 	}
+	return true;
 }
 
 int main()
@@ -65,14 +67,25 @@ int main()
 			}
 		}
 		else if (command == "S") {
-			int new_command;
+			int number;
 			while (true) {
-				display_stocks(trader);
-				cout << "To sell a stock, type in the stock number you wish to sell" << endl;
-				cin >> new_command;
-				new_command--;
-				trader.sell_from_portfolio(new_command);
-				break;
+				if (display_stocks(trader) == true) {
+					cout << "To sell a stock, type in the stock number you wish to sell, or type 0 to exit" << endl;
+					cin >> number;
+					if (number != 0) {
+						number--;
+						trader.sell_from_portfolio(number);
+						break;
+					}
+					else {
+						if (number == 0) {
+							break;
+						}
+					}
+				}
+				else {
+					break;
+				}
 			}
 		}
 		else if (command == "Dl") {
