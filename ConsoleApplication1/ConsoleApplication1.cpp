@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <unordered_map>
 #include "Stock.h"
 #include "Trader.h"
 using namespace std;
@@ -10,12 +11,47 @@ using namespace std;
 int main()
 {
 	string trader_name;
-    cout << "Hello trader!\n";
+	cout << "Hello trader!\n";
 	cout << "Enter your name here: ";
 	cin >> trader_name;
 	Trader trader(trader_name);
 	cout << "Your trader name is: " << trader.get_name() << endl;
-	cout << "Commands:\nBuy a stock (B)\nSell a stock (S)\nDisplay a list of available stocks (Dl)\nDisplay your portfolio (Dp)\nView Account Balance (V)\nMake a Deposit (Md)\nMake a Withdrawal (Mw)\nHelp (H)" << endl;
+	string commands = "Commands (Case sensitive):\nBuy a stock (B)\nSell a stock (S)\nDisplay a list of available stocks (Dl)\nDisplay your portfolio (Dp)\nView Account Balance (V)\nMake a Deposit (Md)\nMake a Withdrawal (Mw)\nHelp (H)\nExit (E)";
+	cout << commands << endl;
+	string command;
+	while (true) {
+		cout << "Enter a command here: ";
+		cin >> command;
+		if (command == "E") {
+			exit(0);
+		}
+		else {
+			if (command == "B") {
+				cout << "Buy a stock received" << endl;
+			}
+			else if (command == "S") {
+				cout << "Sell a stock received" << endl;
+			}
+			else if (command == "Dl") {
+				cout << "Display a list of available stocks received" << endl;
+			}
+			else if (command == "Dp") {
+				cout << "Display your portfolio received" << endl;
+			}
+			else if (command == "V") {
+				cout << "View your account balance received" << endl;
+			}
+			else if (command == "Md") {
+				cout << "Make a deposit received" << endl;
+			}
+			else if (command == "Mw") {
+				cout << "Make a withdrawal received" << endl;
+			}
+			else if (command == "H") {
+				cout << commands << endl;
+			}
+		}
+	}
 
 	
 }
