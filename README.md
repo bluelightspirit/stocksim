@@ -7,6 +7,7 @@ To setup, use [Visual Studio 2017](https://aka.ms/vs/15/release/vs_community.exe
 Then at the bottom right, press "Modify" if you already have Visual Studio installed, or "Install" if you do not. The image below shows Modify at the bottom right as bluelightspirit who wrote this has Visual Studio 2017 installed already.
 
 ![image](https://github.com/user-attachments/assets/979a853f-b62b-4fa4-acaa-da191c6fdc6d)
+
 After that, at the top left, press "File" then "Start Page"
 
 ![image](https://github.com/user-attachments/assets/810d5469-0a10-4864-9d2c-ab11f088fbfa)
