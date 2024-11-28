@@ -14,6 +14,7 @@ public:
 	void set_balance(double given_balance);
 	void set_portfolio(vector<string> given_portfolio);
 // constructors
+	Trader();
 	Trader(string given_name);
 	Trader(string given_name, double given_balance, vector<string> given_portfolio);
 	

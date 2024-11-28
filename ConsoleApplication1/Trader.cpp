@@ -30,16 +30,23 @@ void Trader::set_portfolio(vector<string> given_portfolio)
 	portfolio = given_portfolio;
 }
 
-Trader::Trader(string name)
+Trader::Trader()
 {
-	name = name;
+	name = "";
+	balance = NULL;
+	portfolio = vector<string>();
+}
+
+Trader::Trader(string given_name)
+{
+	name = given_name;
 	balance = NULL;
 	portfolio = vector<string>();
 }
 
 Trader::Trader(string given_name, double given_balance, vector<string> given_portfolio)
 {
-	name = name;
-	balance = balance;
-	portfolio = portfolio;
+	name = given_name;
+	balance = given_balance;
+	portfolio = given_portfolio;
 }

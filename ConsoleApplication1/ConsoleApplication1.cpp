@@ -10,11 +10,14 @@ using namespace std;
 int main()
 {
 	string trader_name;
-    std::cout << "Hello trader!\n";
+    cout << "Hello trader!\n";
 	cout << "Enter your name here: ";
 	cin >> trader_name;
 	Trader trader(trader_name);
-	cout << trader.get_name();
+	cout << "Your trader name is: " << trader.get_name() << endl;
+	cout << "Commands:\nBuy a stock (B)\nSell a stock (S)\nDisplay a list of available stocks (Dl)\nDisplay your portfolio (Dp)\nView Account Balance (V)\nMake a Deposit (Md)\nMake a Withdrawal (Mw)\nHelp (H)" << endl;
+
+	
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
