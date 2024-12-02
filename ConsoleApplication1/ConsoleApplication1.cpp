@@ -10,19 +10,24 @@ using namespace std;
 
 // flat functions that don't require special global variables for less repetition
 
-// display stocks a trader has in reverse order
+// display stocks a trader has in reverse order, return true if there are any, or false if there are none
 bool display_stocks(Trader trader) {
+	// create vector of Stock objects and set it to the trader portfolio
 	vector<Stock> new_portfolio = trader.get_portfolio();
+	// set i maximum based on size of portfolio
 	int i = new_portfolio.size() - 1;
+	// if i is < 0, tell user they have no stocks and return false
 	if (i < 0) {
 		cout << "You have no stocks!" << endl;
 		return false;
 	}
+	// if i is >= 0, print out the stocks to the user until there are no more
 	while (i >= 0) {
 		Stock latest = new_portfolio[i];
 		cout << "--- Stock #" << i+1 << " ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: " << latest.get_price() << "\n---------------" << endl;
 		i--;
 	}
+	// return true if user has stocks
 	return true;
 }
 
@@ -52,12 +57,19 @@ int main()
 		// if command is B, give optinos to buy or skip stocks, or exit
 		if (command == "B") {
 			cout << "Buy a stock received" << endl;
+			// create new stock
 			Stock newStock;
+			// store users command
 			string new_command;
+			// loop asking for commands on what to do with stocks
 			while (true) {
+				// set a random stock price
 				newStock.set_random_price();
+				// print cost of stock
 				cout << newStock.get_price() << " is the cost of some random stock.\nCommands:\nBuy (B)\nSkip (S)\nExit command loops(E)" << endl;
+				// take in command from user
 				cin >> new_command;
+				// if B, buy the stock and add it to portfolio
 				if (new_command == "B") {
 					cout << "Bought" << endl;
 					trader.add_to_portfolio(newStock);
@@ -66,33 +78,45 @@ int main()
 					cout << "--- New Stock Received ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: " << latest.get_price() << endl;
 					break;
 				}
+				// else if S, skip the stock
 				else if (new_command == "S") {
 					cout << "Skipping" << endl;
 				}
+				// else if E, exit the while loop
 				else if (new_command == "E") {
 					command = "E";
 					break;
 				}
 			}
 		}
+		// if command is S, prompt user to sell a stock by entering the stock number, or type 0 to exit
 		else if (command == "S") {
+			// store number of user input
 			int number;
+			// loop asking for user input to sell a stock number or 0 to exit
 			while (true) {
+				// if trader has stocks, ask them to sell a stock
 				if (display_stocks(trader) == true) {
-					cout << "To sell a stock, type in the stock number you wish to sell, or type 0 to exit" << endl;
+					// print statement giving instructions to user on how to sell stock or to exit
+					cout << "To sell a stock, type in the stock number you wish to sell, or type 0 to exit\nNumber: " << endl;
+					// input command statement for stock number
 					cin >> number;
+					// if number is not 0, subtract the number since the vector starts from 0 then sell that from portfolio.
 					if (number != 0) {
 						number--;
 						trader.sell_from_portfolio(number);
-						break;
 					}
+					// else if number is 0, tell user the program is exiting sell stocks command and exit while loop
 					else {
 						if (number == 0) {
+							cout << "Exiting selling stocks command..." << endl;
 							break;
 						}
 					}
 				}
+				// else if there are no stocks, tell user they have no stocks to sell and exit while loop
 				else {
+					cout << "You have no stocks to sell!" << endl;
 					break;
 				}
 			}
