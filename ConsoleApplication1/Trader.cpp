@@ -92,14 +92,22 @@ void Trader::sell_from_portfolio(int position)
 	portfolio.pop_back();
 }
 
-// withdraw certain amount of money removing from balance
-void Trader::withdraw(double amount)
+// withdraw certain amount of money removing from balance, return true if possible and successful, return false if not possible
+bool Trader::withdraw(double amount)
 {
-	balance -= amount;
+	// store expected balance that subtracts amount from trader balance
+	double expectedBalance = balance - amount;
+	// if expected balance is >= 0, store the new balance and return true
+	if (expectedBalance >= 0) {
+		set_balance(expectedBalance);
+		return true;
+	}
+	// else if expected balance is < 0, return false
+	return false;
 }
 
 // deposit certain amount of money adding to balance
 void Trader::deposit(double amount)
 {
-	balance += amount;
+	set_balance(balance + amount);
 }
