@@ -77,13 +77,21 @@ int main()
 				cout << newStock.get_price() << " is the cost of some random stock.\nCommands:\nBuy (B)\nSkip (S)\nExit command loops(E)" << endl;
 				// take in command from user
 				cin >> new_command;
-				// if B, buy the stock and add it to portfolio
+				// if B, buy the stock and add it to portfolio if possible
 				if (new_command == "B") {
-					cout << "Bought" << endl;
-					trader.add_to_portfolio(newStock);
-					vector<Stock> new_portfolio = trader.get_portfolio();
-					Stock latest = new_portfolio[new_portfolio.size() - 1];
-					cout << "--- New Stock Received ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: " << latest.get_price() << endl;
+					// if stock is less than or equal to trader balance (checked by withdraw boolean), tell user the stock is bought and subtract from their balance
+					if (trader.withdraw(newStock.get_price()) == true) {
+						cout << "Bought" << endl;
+						trader.add_to_portfolio(newStock);
+						// show new stock added
+						vector<Stock> new_portfolio = trader.get_portfolio();
+						Stock latest = new_portfolio[new_portfolio.size() - 1];
+						cout << "--- New Stock Added ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: " << latest.get_price() << endl;
+					}
+					// if new stock price is greater than trader balance (checked by withdraw boolean), tell user they don't have enough money for this stock
+					else {
+						cout << "You don't have enough money to buy this stock!" << endl;
+					}
 					break;
 				}
 				// else if S, skip the stock
