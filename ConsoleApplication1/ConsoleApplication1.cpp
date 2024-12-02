@@ -163,10 +163,21 @@ int main()
 			// tell user's actual balance to the user
 			cout << trader.get_balance() << endl;
 		}
-		// else if command is Md, 
+		// else if command is Md, prompt user to make a deposit by entering in the amount of money they wish to deposit
 		else if (command == "Md") {
+			// tell user the make a deposit command is received
 			cout << "Make a deposit received" << endl;
-
+			// prompt user to enter in the amount they wish to deposit
+			cout << "Enter in the amount you wish to deposit (decimal numbers are allowed)" << endl;
+			cout << "Amount: $";
+			// store deposit amount
+			double depositAmount;
+			// take in deposit amount from user
+			cin >> depositAmount;
+			// deposit the deposit amount to the user
+			trader.deposit(depositAmount);
+			// tell user their new balance
+			cout << "This is your new balance after depositing: $" << trader.get_balance() << endl;
 		}
 		// else if command is Mw,
 		else if (command == "Mw") {
