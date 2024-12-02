@@ -30,6 +30,7 @@ bool display_stocks(Trader trader) {
 int main()
 {
 	// traders name
+
 	string trader_name;
 	cout << "Hello trader!\n";
 	cout << "Enter your name here: ";
@@ -37,7 +38,7 @@ int main()
 	Trader trader(trader_name);
 	cout << "Your trader name is: " << trader.get_name() << endl;
 	// commands for user to enter
-	string commands = "Commands (Case sensitive):\nBuy a stock (B)\nSell a stock (S)\nDisplay a list of available stocks (Dl)\nDisplay your portfolio (Dp)\nView Account Balance (V)\nMake a Deposit (Md)\nMake a Withdrawal (Mw)\nHelp (H)\nExit (E)";
+	string commands = "Commands (Case sensitive):\nBuy a stock (B)\nSell a stock (S)\nDisplay a list of available stocks (Dl)\nDisplay your portfolio (Dp)\nView Account Balance (V)\nMake a Deposit (Md)\nMake a Withdrawal (Mw)\nChange name (C)\nView name (Vn)\nHelp (H)\nExit (E)";
 	cout << commands << endl;
 	string command;
 	while (true) {
@@ -123,6 +124,17 @@ int main()
 		}
 		else if (command == "H") {
 			cout << commands << endl;
+		}
+		else if (command == "C") {
+			cout << "What do you want to change your name to?" << endl;
+			string new_name;
+			cout << "Name: ";
+			cin >> new_name;
+			trader.set_name(new_name);
+			cout << "Name changed to: " << trader.get_name() << endl;
+		}
+		else if (command == "Vn") {
+			cout << "Your name is: " << trader.get_name() << endl;
 		}
 	}
 
