@@ -34,18 +34,25 @@ bool display_stocks(Trader trader) {
 // main method to run command prompt for now. maybe not allowed for HCI so is temporary for now, but good start?
 int main()
 {
-	// traders name
-
+	// store traders name
 	string trader_name;
+	// tell user hello
 	cout << "Hello trader!\n";
+	// tell user to enter their name
 	cout << "Enter your name here: ";
+	// take in input for trader to enter their name
 	cin >> trader_name;
+	// create trader object for the user
 	Trader trader(trader_name);
+	// output trader name to user
 	cout << "Your trader name is: " << trader.get_name() << endl;
-	// commands for user to enter
+	// store commands for user to enter
 	string commands = "Commands (Case sensitive):\nBuy a stock (B)\nSell a stock (S)\nDisplay a list of available stocks (Dl)\nDisplay your portfolio (Dp)\nView Account Balance (V)\nMake a Deposit (Md)\nMake a Withdrawal (Mw)\nChange name (C)\nView name (Vn)\nHelp (H)\nExit (E)";
+	// output commands for user to enter to user
 	cout << commands << endl;
+	// store main command for user to enter (user enters this before entering other commands required by some features such as buying a stock)
 	string command;
+	// infinite while loop asking user for commands
 	while (true) {
 		// exit if command is E
 		if (command == "E") {
@@ -53,6 +60,7 @@ int main()
 		}
 		// ask for command input from user and take it in
 		cout << "Enter a command here: ";
+		// take in input from user and store it to command
 		cin >> command;
 		// if command is B, give optinos to buy or skip stocks, or exit
 		if (command == "B") {
@@ -121,43 +129,71 @@ int main()
 				}
 			}
 		}
+		// else if command is Dl, display available stocks
 		else if (command == "Dl") {
+			// tell user their command to display a list of available stocks is received
 			cout << "Display a list of available stocks received" << endl;
+			// create a new trader
 			Trader the_stock_market;
+			// create new stock
 			Stock newStock1("DoStock391");
+			// give it a random price
 			newStock1.set_random_price();
+			// create new stock
 			Stock newStock2("ReStock123");
+			// give it a random price
 			newStock2.set_random_price();
+			// add the stocks to the portfolio
 			the_stock_market.add_to_portfolio(newStock1);
 			the_stock_market.add_to_portfolio(newStock2);
+			// display the stocks the stock market trader has
 			display_stocks(the_stock_market);
 		}
+		// else if command is Dp, show stocks the user has
 		else if (command == "Dp") {
+			// tell user the command to display their portfolio is received
 			cout << "Display your portfolio received" << endl;
+			// show stocks user has
 			display_stocks(trader);
 		}
+		// else if command is V, show the user's balance
 		else if (command == "V") {
+			// tell user here is your balance
 			cout << "Here is your balance:" << endl;
+			// tell user's actual balance to the user
 			cout << trader.get_balance() << endl;
 		}
+		// else if command is Md, 
 		else if (command == "Md") {
 			cout << "Make a deposit received" << endl;
+
 		}
+		// else if command is Mw,
 		else if (command == "Mw") {
 			cout << "Make a withdrawal received" << endl;
 		}
+		// else if command is H, show help commands available to the user
 		else if (command == "H") {
+			// prints out help commands to the user
 			cout << commands << endl;
 		}
+		// else if command is C, ask user what they want to change their name to and change it
 		else if (command == "C") {
+			// ask user what they want to change their name to
 			cout << "What do you want to change your name to?" << endl;
-			string new_name;
+			string new_name; // store the new name
+			// fancy prompt for telling user what name to enter by outputting Name: first
 			cout << "Name: ";
+			// take in input to change the name from the user
 			cin >> new_name;
+			// change the name to the name the user gave
 			trader.set_name(new_name);
+			// output the name is changed to the user and the new name they choes
 			cout << "Name changed to: " << trader.get_name() << endl;
 		}
+		// else if command is Vn, view their name
 		else if (command == "Vn") {
+			// tell the user their name
 			cout << "Your name is: " << trader.get_name() << endl;
 		}
 	}
