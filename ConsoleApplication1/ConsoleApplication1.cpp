@@ -10,14 +10,14 @@ using namespace std;
 
 // needs and nice to haves brainstorming
 
-// need global variables for stocks to buy, and access to them (displaying list of available stocks and buying stocks should link up together instead of being different)
+// DONE: need global variables for stocks to buy, and access to them (displaying list of available stocks and buying stocks should link up together instead of being different)
 // only the trader has to be global. the stocks within this trader can be local just part of the_stock_market's portfolio
 Trader the_stock_market(-1);
 
 // need quantity options for stocks
 // need total value for stocks
 // need stock price simulation to fluctuate prices of stocks over time
-// need selling stock to add to balance
+// PARTIALLY DONE: need selling stock to add to balance
 // need unordered_map of Stock to consider allowing traders as one part and number of stocks they have as another part. so no more <string, int> instead <Trader, int>
 // need get method for getting trader name and number of stocks they have
 // need get method for getting all traders and stocks they have
@@ -56,7 +56,7 @@ bool display_stocks(Trader trader) {
 	// if i is >= 0, print out the stocks to the user until there are no more
 	while (i >= 0) {
 		Stock latest = new_portfolio[i];
-		cout << "--- Stock #" << i+1 << " ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: " << latest.get_price() << "\n---------------" << endl;
+		cout << "--- Stock #" << i+1 << " ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $" << latest.get_price() << "\n---------------" << endl;
 		i--;
 	}
 	// return true if user has stocks
@@ -137,25 +137,32 @@ int main()
 				if (number != 0) {
 					// subtract number by 1 as vectors start from 0
 					number--;
-					// if stock is less than or equal to trader balance (checked by withdraw boolean), tell user the stock is bought and subtract from their balance
-					Stock newStock = the_stock_market.get_from_portfolio(number);
-					if (trader.withdraw(newStock.get_price()) == true) {
-						cout << "Bought" << endl;
-						trader.add_to_portfolio(newStock);
-						// show new stock added
-						vector<Stock> new_portfolio = trader.get_portfolio();
-						Stock latest = new_portfolio[new_portfolio.size() - 1];
-						cout << "--- New Stock Added ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: " << latest.get_price() << endl;
+					if (the_stock_market.validate_position(number) == false) {
+						cout << "Your number does not match the number of any of the stocks above. Try again!" << endl;
 					}
-					// if new stock price is greater than trader balance (checked by withdraw boolean), tell user they don't have enough money for this stock
 					else {
-						cout << "You don't have enough money to buy this stock!" << endl;
+						// if stock is less than or equal to trader balance (checked by withdraw boolean), tell user the stock is bought and subtract from their balance
+						Stock newStock = the_stock_market.get_from_portfolio(number);
+						if (trader.withdraw(newStock.get_price()) == true) {
+							cout << "Bought" << endl;
+							trader.add_to_portfolio(newStock);
+							// show new stock added
+							vector<Stock> new_portfolio = trader.get_portfolio();
+							Stock latest = new_portfolio[new_portfolio.size() - 1];
+							cout << "--- New Stock Added ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $ " << latest.get_price() << endl;
+							// remove stock from the market
+							the_stock_market.remove_from_portfolio(number);
+						}
+						// if new stock price is greater than trader balance (checked by withdraw boolean), tell user they don't have enough money for this stock
+						else {
+							cout << "You don't have enough money to buy this stock!" << endl;
+						}
 					}
 				//	break;
 				}
 				// else if 0, exit the while loop
 				else {
-					//command = "E";
+					cout << "Exiting buying..." << endl;
 					break;
 				}
 			}
@@ -169,7 +176,7 @@ int main()
 				// if trader has stocks, ask them to sell a stock
 				if (display_stocks(trader) == true) {
 					// print statement giving instructions to user on how to sell stock or to exit
-					cout << "To sell a stock, type in the stock number you wish to sell, or type 0 to exit\nNumber: " << endl;
+					cout << "To sell a stock, type in the stock number you wish to sell, or type 0 to exit\nNumber: ";
 					// input command statement for stock number
 					cin >> number;
 					// if number is not 0, subtract the number since the vector starts from 0 then sell that from portfolio.
@@ -185,9 +192,9 @@ int main()
 						}
 					}
 				}
-				// else if there are no stocks, tell user they have no stocks to sell and exit while loop
+				// else if there are no stocks, tell user they have no stocks and exit while loop
 				else {
-					cout << "You have no stocks to sell!" << endl;
+					// telling user they have no stocks is done by default
 					break;
 				}
 			}
@@ -211,7 +218,7 @@ int main()
 			// tell user here is your balance
 			cout << "Here is your balance:" << endl;
 			// tell user's actual balance to the user
-			cout << trader.get_balance() << endl;
+			cout << "$" << trader.get_balance() << endl;
 		}
 		// else if command is Md, prompt user to make a deposit by entering in the amount of money they wish to deposit
 		else if (command == "Md") {
@@ -231,7 +238,25 @@ int main()
 		}
 		// else if command is Mw,
 		else if (command == "Mw") {
+		// tell user the make a withdrawal command is received
 			cout << "Make a withdrawal received" << endl;
+			// prompt user to enter in the amount they wish to withdraw
+			cout << "Enter in the amount you wish to deposit (decimal numbers are allowed)" << endl;
+			cout << "Amount: $";
+			// store withdraw amount
+			double withdrawAmount;
+			// take in withdrawal amount from user
+			cin >> withdrawAmount;
+			// withdraw amount from the user
+			// if withdraw is not possible, tell user they cannot withdraw that amount
+			if (trader.withdraw(withdrawAmount) == false) {
+				cout << "You cannot withdraw that amount! Here is your balance: $" << trader.get_balance() << endl;
+			}
+			// if withdraw is possible, tell user their new balance after withdrawing
+			else {
+				// tell user their new balance
+				cout << "This is your new balance after withdrawing: $" << trader.get_balance() << endl;
+			}
 		}
 		// else if command is H, show help commands available to the user
 		else if (command == "H") {

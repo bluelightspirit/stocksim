@@ -21,6 +21,12 @@ vector<Stock> Trader::get_portfolio()
 	return portfolio;
 }
 
+// get a Stock from portfolio vector
+Stock Trader::get_from_portfolio(int position)
+{
+	return portfolio[position];
+}
+
 // setters
 
 // sets Trader's name
@@ -75,6 +81,19 @@ Trader::Trader(string given_name, double given_balance, vector<Stock> given_port
 	portfolio = given_portfolio;
 }
 
+// position valdiator for portfolio
+bool Trader::validate_position(int position)
+{
+	if (portfolio.size() <= 0 || position < 0 || position > portfolio.size() - 1) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}
+
+
+
 // adders and removers
 
 // add Stock to portfolio vector
@@ -84,7 +103,7 @@ void Trader::add_to_portfolio(Stock given_stock)
 }
 
 // remove Stock from portfolio vector
-void Trader::sell_from_portfolio(int position)
+void Trader::remove_from_portfolio(int position)
 {
 	if (portfolio.size() - 1 < 0) {
 		portfolio.pop_back();
@@ -100,13 +119,12 @@ void Trader::sell_from_portfolio(int position)
 	portfolio.pop_back();
 }
 
-// get a Stock from portfolio vector
-Stock Trader::get_from_portfolio(int position)
+// sell Stock from portfolio vector
+void Trader::sell_from_portfolio(int position)
 {
-	if (portfolio.size() <= 0 || position < portfolio.size() - 1 || position > portfolio.size() - 1) {
-		return NULL;
-	}
-	return portfolio[position];
+	int stock_cost = get_from_portfolio(position).get_price();
+	remove_from_portfolio(position);
+	balance += stock_cost;
 }
 
 // withdraw certain amount of money removing from balance, return true if possible and successful, return false if not possible

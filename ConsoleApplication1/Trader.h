@@ -11,6 +11,7 @@ public:
 	string get_name(); // gets Trader's name
 	double get_balance(); // gets Trader's balance
 	vector<Stock> get_portfolio(); // gets Trader's portfolio
+	Stock get_from_portfolio(int position); // get a Stock from portfolio vector
 // setters
 	void set_name(string given_name); // sets Trader's name
 	void set_balance(double given_balance); // sets balance of Trader
@@ -20,10 +21,12 @@ public:
 	Trader(string given_name); // constructs Trader with a passed in name, null balance, and empty vector portfolio
 	Trader(double given_balance); // constructs Trader with a passed in balance
 	Trader(string given_name, double given_balance, vector<Stock> given_portfolio); // constructs Trader with everything passed in: a name, a balance, and a portfolio vector
+// validators
+	bool validate_position(int position); // validate position
 // adders and removers
 	void add_to_portfolio(Stock given_stock); // add Stock to portfolio vector
-	void sell_from_portfolio(int position); // remove Stock from portfolio vector
-	Stock get_from_portfolio(int position); // get a Stock from portfolio vector
+	void remove_from_portfolio(int position); // remove Stock from portfolio vector
+	void sell_from_portfolio(int position); // sell Stock from portfolio vector
 	bool withdraw(double amount); // withdraw certain amount of money removing from balance, return true if possible and successful, return false if not possible
 	void deposit(double amount); // deposit certain amount of money adding to balance
 	
