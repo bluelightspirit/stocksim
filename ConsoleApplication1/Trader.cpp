@@ -59,6 +59,14 @@ Trader::Trader(string given_name)
 	portfolio = vector<Stock>();
 }
 
+// constructs Trader with just balance passed in
+Trader::Trader(double given_balance)
+{
+	name = "";
+	balance = given_balance;
+	portfolio = vector<Stock>();
+}
+
 // constructs Trader with everything passed in: a name, a balance, and a portfolio vector
 Trader::Trader(string given_name, double given_balance, vector<Stock> given_portfolio)
 {
@@ -90,6 +98,15 @@ void Trader::sell_from_portfolio(int position)
 	Stock pos = portfolio[position];
 	portfolio[position] = end;
 	portfolio.pop_back();
+}
+
+// get a Stock from portfolio vector
+Stock Trader::get_from_portfolio(int position)
+{
+	if (portfolio.size() <= 0 || position < portfolio.size() - 1 || position > portfolio.size() - 1) {
+		return NULL;
+	}
+	return portfolio[position];
 }
 
 // withdraw certain amount of money removing from balance, return true if possible and successful, return false if not possible

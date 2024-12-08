@@ -11,6 +11,9 @@ using namespace std;
 // needs and nice to haves brainstorming
 
 // need global variables for stocks to buy, and access to them (displaying list of available stocks and buying stocks should link up together instead of being different)
+// only the trader has to be global. the stocks within this trader can be local just part of the_stock_market's portfolio
+Trader the_stock_market(-1);
+
 // need quantity options for stocks
 // need total value for stocks
 // need stock price simulation to fluctuate prices of stocks over time
@@ -38,9 +41,16 @@ bool display_stocks(Trader trader) {
 	vector<Stock> new_portfolio = trader.get_portfolio();
 	// set i maximum based on size of portfolio
 	int i = new_portfolio.size() - 1;
-	// if i is < 0, tell user they have no stocks and return false
+	// if i is < 0, tell user or stock market they have no stocks and return false
 	if (i < 0) {
-		cout << "You have no stocks!" << endl;
+		// if the trader is the stock market determined by balance -1, say the stock market has no stocks
+		if (trader.get_balance() == -1) {
+			cout << "The stock market has no stocks!" << endl;
+		}
+		// else if the trader is a user, say they have no stocks
+		else {
+			cout << "You have no stocks!" << endl;
+		}
 		return false;
 	}
 	// if i is >= 0, print out the stocks to the user until there are no more
@@ -51,6 +61,30 @@ bool display_stocks(Trader trader) {
 	}
 	// return true if user has stocks
 	return true;
+}
+
+void add_random_stocks_to_stock_market() {
+	// create new stock
+	Stock newStock1("DoStock391");
+	// give it a random price
+	newStock1.set_random_price();
+	// create new stock
+	Stock newStock2("ReStock123");
+	// give it a random price
+	newStock2.set_random_price();
+	// add the stocks to the portfolio
+	the_stock_market.add_to_portfolio(newStock1);
+	the_stock_market.add_to_portfolio(newStock2);
+}
+
+// display stocks stock market has, and also add new stocks if necessary
+void display_stock_market_stocks() {
+	if (display_stocks(the_stock_market) == false) {
+		cout << "Adding more stocks to the stock market..." << endl;
+		add_random_stocks_to_stock_market();
+		cout << "Stocks added!" << endl;
+		display_stocks(the_stock_market);
+	}
 }
 
 // main method to run command prompt for now. maybe not allowed for HCI so is temporary for now, but good start?
@@ -87,21 +121,24 @@ int main()
 		// if command is B, give optinos to buy or skip stocks, or exit
 		if (command == "B") {
 			cout << "Buy a stock received" << endl;
-			// create new stock
-			Stock newStock;
 			// store users command
-			string new_command;
+			int number;
 			// loop asking for commands on what to do with stocks
 			while (true) {
-				// set a random stock price
-				newStock.set_random_price();
-				// print cost of stock
-				cout << newStock.get_price() << " is the cost of some random stock.\nCommands:\nBuy (B)\nSkip (S)\nExit command loops(E)" << endl;
+				// display stock market stocks
+				display_stock_market_stocks();
+				// print commands for buying stock
+				cout << "\nCommands:\nBuy Stock - Enter In Number (#)\nExit buying (0)" << endl;
+				cout << "Your command: ";
 				// take in command from user
-				cin >> new_command;
-				// if B, buy the stock and add it to portfolio if possible
-				if (new_command == "B") {
+				cin >> number;
+				cout << endl;
+				// if a numebr not 0, buy the stock and add it to portfolio if possible
+				if (number != 0) {
+					// subtract number by 1 as vectors start from 0
+					number--;
 					// if stock is less than or equal to trader balance (checked by withdraw boolean), tell user the stock is bought and subtract from their balance
+					Stock newStock = the_stock_market.get_from_portfolio(number);
 					if (trader.withdraw(newStock.get_price()) == true) {
 						cout << "Bought" << endl;
 						trader.add_to_portfolio(newStock);
@@ -114,15 +151,11 @@ int main()
 					else {
 						cout << "You don't have enough money to buy this stock!" << endl;
 					}
-					break;
+				//	break;
 				}
-				// else if S, skip the stock
-				else if (new_command == "S") {
-					cout << "Skipping" << endl;
-				}
-				// else if E, exit the while loop
-				else if (new_command == "E") {
-					command = "E";
+				// else if 0, exit the while loop
+				else {
+					//command = "E";
 					break;
 				}
 			}
@@ -163,21 +196,8 @@ int main()
 		else if (command == "Dl") {
 			// tell user their command to display a list of available stocks is received
 			cout << "Display a list of available stocks received" << endl;
-			// create a new trader
-			Trader the_stock_market;
-			// create new stock
-			Stock newStock1("DoStock391");
-			// give it a random price
-			newStock1.set_random_price();
-			// create new stock
-			Stock newStock2("ReStock123");
-			// give it a random price
-			newStock2.set_random_price();
-			// add the stocks to the portfolio
-			the_stock_market.add_to_portfolio(newStock1);
-			the_stock_market.add_to_portfolio(newStock2);
-			// display the stocks the stock market trader has
-			display_stocks(the_stock_market);
+			// display the stocks the stock market has
+			display_stock_market_stocks();
 		}
 		// else if command is Dp, show stocks the user has
 		else if (command == "Dp") {
