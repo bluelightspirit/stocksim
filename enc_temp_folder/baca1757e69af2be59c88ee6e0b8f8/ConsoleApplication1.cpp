@@ -8,28 +8,6 @@
 #include "Trader.h"
 using namespace std;
 
-// needs and nice to haves brainstorming
-
-// need global variables for stocks to buy, and access to them (displaying list of available stocks and buying stocks should link up together instead of being different)
-// need quantity options for stocks
-// need total value for stocks
-// need stock price simulation to fluctuate prices of stocks over time
-// need selling stock to add to balance
-// need unordered_map of Stock to consider allowing traders as one part and number of stocks they have as another part. so no more <string, int> instead <Trader, int>
-// need get method for getting trader name and number of stocks they have
-// need get method for getting all traders and stocks they have
-// need change method for changing number of stock units a trader has
-// need set method for adding a trader to a stock with number of stock units they have
-// need search method for stocks, searching for a certain trader and the # of stocks they have
-// need error messages for insufficient funds, invalid stock symbols, or negative quantities -- if i add max stocks option then error for that too
-// need sell and buy methods to change account balance depending on quantity they choose
-
-// nice to have: ability to remove trader from a stock (need to at least make it just be 0 - the efficiency of keeping them at 0 vs. just removing them would take too long to measure) - leaned to nice to have because removing makes listing traders and their stock units easier
-// nice to have: the first entry of the map has some sort of stock maximum with a trader Admin.
-// nice to have: stocks have quantity maximum to buy
-// nice to have: switch trader accounts
-// nice to have: save data in .txt files on exit and load them (may have done similar in Java 240 but would take a while)
-
 // flat functions that don't require special global variables for less repetition
 
 // display stocks a trader has in reverse order, return true if there are any, or false if there are none
