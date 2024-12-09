@@ -1,13 +1,13 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "Stock.h"
+class Stock; // forward declaration of Stock class so include isn't needed (include had breaking problems before)
 using namespace std;
 // the Trader class represents a corporation, market, or person who buys/sells stocks from the Stock class with a balance of how much money they have on top of that
 class Trader
 {
 public:
-// getters
+	// getters
 	string get_name(); // gets Trader's name
 	double get_balance(); // gets Trader's balance
 	vector<Stock> get_portfolio(); // gets Trader's portfolio
@@ -29,11 +29,10 @@ public:
 	void sell_from_portfolio(int position); // sell Stock from portfolio vector
 	bool withdraw(double amount); // withdraw certain amount of money removing from balance, return true if possible and successful, return false if not possible
 	void deposit(double amount); // deposit certain amount of money adding to balance
-	
+
 private:
 	// main variables
 	string name; // Trader's name
 	double balance; // how much money Trader has
 	vector<Stock> portfolio; // how many Stocks Trader has in portfolio
 };
-
