@@ -168,14 +168,32 @@ bool Trader::sell_from_portfolio(int position, int given_quantity)
 	}
 	// set stock cost based on that price and quantity
 	int stock_cost = stock_messing_with.get_price() * given_quantity;
-	// subtract from used quantity in stock by given quatntity
-	stock_messing_with.set_used_quantity(stock_messing_with.get_used_quantity() - given_quantity);
+	// subtract from used quantity in stock by given quantity
+	portfolio[position].set_used_quantity(stock_messing_with.get_used_quantity() - given_quantity);
 	// remove stock from portfolio if necessary
-	if (stock_messing_with.get_used_quantity() == 0) {
+	if (portfolio[0].get_used_quantity() == 0) {
 		remove_from_portfolio(position);
 	}
 	// add stock cost to user balance
 	balance += stock_cost;
+	// return true as this is possible
+	return true;
+}
+
+// sell Stock from stock market portfolio vector given quantity and position (does not alter balance or remove stocks)
+bool Trader::sell_from_stock_market(int position, int given_quantity)
+{
+	// use stock messing with from position
+	Stock stock_messing_with = get_from_portfolio(position);
+	// if given quantity is less than 0 or greater than current used quantity
+	if (given_quantity <= 0 || given_quantity > stock_messing_with.get_used_quantity()) {
+		// return false as this is not possible
+		return false;
+	}
+	// set stock cost based on that price and quantity
+	int stock_cost = stock_messing_with.get_price() * given_quantity;
+	// subtract from used quantity in stock by given quantity
+	portfolio[position].set_used_quantity(stock_messing_with.get_used_quantity() - given_quantity);
 	// return true as this is possible
 	return true;
 }

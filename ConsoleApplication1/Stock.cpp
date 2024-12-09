@@ -19,7 +19,7 @@ double Stock::get_price()
 }
 
 // gets attributes of Stock
-map<string, int> Stock::get_attributes()
+map<string, double> Stock::get_attributes()
 {
 	return attributes;
 }
@@ -63,7 +63,7 @@ void Stock::set_price(double given_price)
 }
 
 // sets attributes of Stock (literal)
-void Stock::set_attributes(map<string, int> given_attributes)
+void Stock::set_attributes(map<string, double> given_attributes)
 {
 	attributes = given_attributes;
 }
@@ -92,6 +92,11 @@ void Stock::set_used_quantity(int given_current_used_quantity)
 	current_used_quantity = given_current_used_quantity;
 }
 
+// sets attributes of Stock (simplistic) - inserts into attributes given an action and strength
+void Stock::set_attributes_simplistic(string given_action, double given_strength) {
+	attributes.insert({ given_action, given_strength });
+}
+
 // constructors
 
 // constructs an empty Stock with a null price, empty string, and empty attributes vector
@@ -99,7 +104,7 @@ Stock::Stock()
 {
 	symbol = "";
 	price = NULL;
-	attributes = map<string, int>();
+	attributes = map<string, double>();
 	max_quantity = NULL;
 	current_used_quantity = 0;
 }
@@ -109,7 +114,7 @@ Stock::Stock(string given_symbol)
 {
 	symbol = given_symbol;
 	price = NULL;
-	attributes = map<string, int>();
+	attributes = map<string, double>();
 	max_quantity = NULL;
 	current_used_quantity = 0;
 }
@@ -119,13 +124,13 @@ Stock::Stock(double given_price)
 {
 	symbol = "";
 	price = given_price;
-	attributes = map<string, int>();
+	attributes = map<string, double>();
 	max_quantity = NULL;
 	current_used_quantity = 0;
 }
 
 // constructs a Stock with an empty String, the passed in price, and passed in attributes map
-Stock::Stock(double given_price, map<string, int> given_attributes)
+Stock::Stock(double given_price, map<string, double> given_attributes)
 {
 	symbol = "";
 	price = given_price;
@@ -134,7 +139,7 @@ Stock::Stock(double given_price, map<string, int> given_attributes)
 	current_used_quantity = 0;
 }
 
-Stock::Stock(string given_symbol, double given_price, map<string, int> given_attributes, int given_max_quantity, int given_used_quantity)
+Stock::Stock(string given_symbol, double given_price, map<string, double> given_attributes, int given_max_quantity, int given_used_quantity)
 {
 	symbol = given_symbol;
 	price = given_price;

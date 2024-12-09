@@ -38,13 +38,20 @@ Trader the_stock_market(-1);
 
 // flat functions that don't require special global variables for less repetition
 
+// fluctuate stock prices
+void fluctuate_stocks(Trader trader) {
+
+}
+
 // display stocks a trader has in reverse order, return true if there are any, or false if there are none
 bool display_stocks(Trader trader) {
 	// calculate total balance of stocks
 	// used quantity
-	int total_balance_used_quantity = 0;
+	double total_balance_used_quantity = 0;
 	// max quantity
-	int total_balance_max_quantity = 0;
+	double total_balance_max_quantity = 0;
+	// unavailable counter for counting stocks not available to buy
+	int unavailable_counter = 0;
 	// create vector of Stock objects and set it to the trader portfolio
 	vector<Stock> new_portfolio = trader.get_portfolio();
 	// set i maximum based on size of portfolio
@@ -64,10 +71,22 @@ bool display_stocks(Trader trader) {
 	// if i is >= 0, print out the stocks to the user until there are no more
 	while (i >= 0) {
 		Stock latest = new_portfolio[i];
-		total_balance_used_quantity += latest.get_used_quantity_price();
-		total_balance_max_quantity += latest.get_max_quantity_price();
-		cout << "--- Stock #" << i + 1 << " ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $" << latest.get_price() << "\nQuantity Used Overall: " << latest.get_used_quantity() << "\nMax Quantity: " << latest.get_max_quantity() << "\nTotal Price For Max Quantity: $" << latest.get_max_quantity_price() << "\nTotal Price For Current Used Quantity: $" << latest.get_used_quantity_price() << "\n---------------" << endl;
+		// if get used quantity is = to max quantity and trader get balance of -1 indicates it is stock market, stock is unavailable so add to the unavailable counter
+		if (latest.get_used_quantity() == latest.get_max_quantity() && trader.get_balance() == -1) {
+			unavailable_counter++;
+		}
+		// else if used max quantity is not = to max quantity, print the stock
+		else {
+			// add to total balance for used quantity and max quantity for AVAILABLE stocks
+			total_balance_used_quantity += latest.get_used_quantity_price();
+			total_balance_max_quantity += latest.get_max_quantity_price();
+			cout << "--- Stock #" << i + 1 << " ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $" << latest.get_price() << "\nQuantity Used Overall: " << latest.get_used_quantity() << "\nMax Quantity: " << latest.get_max_quantity() << "\nTotal Price For Max Quantity: $" << latest.get_max_quantity_price() << "\nTotal Price For Current Used Quantity: $" << latest.get_used_quantity_price() << "\n---------------" << endl;
+		}
 		i--;
+	}
+	// if portfolio size is equal to unavailable counter, there are no more stocks available in the market so return false
+	if (trader.get_portfolio().size() == unavailable_counter) {
+		return false;
 	}
 	// cout the sum of stocks used and maximum prices
 	cout << "Sum of Stock Used Quantity Prices: $" << total_balance_used_quantity << endl;
@@ -318,6 +337,11 @@ int main()
 							// tell user failed to sell quantity from portfolio and exit selling loop
 							cout << "Failed to sell quantity from portfolio, number is higher than the overall used quantity. Exiting selling stocks..." << endl;
 							break;
+						}
+						// else if possible to sell from portfolio,
+						else {
+							// sell from stock market also
+							the_stock_market.sell_from_stock_market(number, quantity);
 						}
 					}
 					// else if number is 0, tell user the program is exiting sell stocks command and exit while loop
