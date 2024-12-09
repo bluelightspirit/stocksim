@@ -1,5 +1,4 @@
 #include "Stock.h"
-#include "Trader.h"
 
 // getters
 
@@ -16,14 +15,9 @@ double Stock::get_price()
 }
 
 // gets attributes of Stock
-map<Trader*, int> Stock::get_attributes()
+unordered_map<string, int> Stock::get_attributes()
 {
 	return attributes;
-}
-
-int Stock::get_max_quantity()
-{
-	return 0;
 }
 
 // setters
@@ -41,7 +35,7 @@ void Stock::set_price(double given_price)
 }
 
 // sets attributes of Stock
-void Stock::set_attributes(map<Trader*, int> given_attributes)
+void Stock::set_attributes(unordered_map<string, int> given_attributes)
 {
 	attributes = given_attributes;
 }
@@ -52,11 +46,6 @@ void Stock::set_random_price()
 	set_price(rand());
 }
 
-void Stock::set_max_quantity(int given_max_quantity)
-{
-	given_max_quantity = max_quantity;
-}
-
 // constructors
 
 // constructs an empty Stock with a null price, empty string, and empty attributes vector
@@ -64,8 +53,7 @@ Stock::Stock()
 {
 	symbol = "";
 	price = NULL;
-	attributes = map<Trader*, int>();
-	max_quantity = rand() % 100 + 1;
+	attributes = unordered_map<string, int>();
 }
 
 // constructs a mostly empty Stock with the passed in symbol, null price, and empty attributes vector
@@ -73,32 +61,29 @@ Stock::Stock(string given_symbol)
 {
 	symbol = given_symbol;
 	price = NULL;
-	attributes = map<Trader*, int>();
-	max_quantity = rand() % 100 + 1;
+	attributes = unordered_map<string, int>();
 }
 
-// constructs a Stock with an empty string, the passed in price, and empty attributes map
+// constructs a Stock with an empty string, the passed in price, and empty attributes vector
 Stock::Stock(double given_price)
 {
 	symbol = "";
 	price = given_price;
-	attributes = map<Trader*, int>();
-	max_quantity = rand() % 100 + 1;
+	attributes = unordered_map<string, int>();
 }
 
-// constructs a Stock with an empty String, the passed in price, and passed in attributes map
-Stock::Stock(double given_price, map<Trader*, int> given_attributes)
+// constructs a Stock with an empty String, the passed in price, and passed in attributes vector
+Stock::Stock(double given_price, unordered_map<string, int> given_attributes)
 {
 	symbol = "";
 	price = given_price;
 	attributes = given_attributes;
-	max_quantity = rand() % 100 + 1;
 }
 
-Stock::Stock(string given_symbol, double given_price, map<Trader*, int> given_attributes, int given_max_quantity)
+// constructs a Stock given a symbol, price, and attributes all passed in
+Stock::Stock(string given_symbol, double given_price, unordered_map<string, int> given_attributes)
 {
 	symbol = given_symbol;
 	price = given_price;
 	attributes = given_attributes;
-	max_quantity = given_max_quantity;
 }
