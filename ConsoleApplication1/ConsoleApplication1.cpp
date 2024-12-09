@@ -69,13 +69,17 @@ void add_random_stocks_to_stock_market() {
 	Stock newStock1("DoStock391");
 	// give it a random price
 	newStock1.set_random_price();
-	// set quantity available the stock market has
+	// set random quantity available
+	newStock1.set_max_quantity(2);
 	cout << newStock1.get_max_quantity();
+	// add to attributes map the stock market and how much quantity it has
 	newStock1.set_attributes_simplified(&the_stock_market, newStock1.get_max_quantity());
 	// create new stock
 	Stock newStock2("ReStock123");
 	// give it a random price
 	newStock2.set_random_price();
+	// set random quantity available
+	newStock2.set_max_quantity(rand() % 100 + 1);
 	// set quantity available the stock market has
 	newStock2.set_attributes_simplified(&the_stock_market, newStock1.get_max_quantity());
 	// add the stocks to the portfolio

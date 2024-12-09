@@ -65,7 +65,7 @@ void Stock::set_random_price()
 // sets max quantity of Stock
 void Stock::set_max_quantity(int given_max_quantity)
 {
-	given_max_quantity = max_quantity;
+	max_quantity = given_max_quantity;
 }
 
 // sets attributes of Stock (simplified)
@@ -91,7 +91,7 @@ Stock::Stock()
 	symbol = "";
 	price = NULL;
 	attributes = map<Trader*, int>();
-	max_quantity = rand() % 100 + 1;
+	max_quantity = NULL;
 }
 
 // constructs a mostly empty Stock with the passed in symbol, null price, and empty attributes vector
@@ -100,10 +100,7 @@ Stock::Stock(string given_symbol)
 	symbol = given_symbol;
 	price = NULL;
 	attributes = map<Trader*, int>();
-	int random_number = rand() % 100 + 1;
-	cout << random_number << endl;
-	max_quantity = random_number;
-	//cout << rand() % 100 + 1;
+	max_quantity = NULL;
 }
 
 // constructs a Stock with an empty string, the passed in price, and empty attributes map
@@ -112,7 +109,7 @@ Stock::Stock(double given_price)
 	symbol = "";
 	price = given_price;
 	attributes = map<Trader*, int>();
-	max_quantity = rand() % 100 + 1;
+	max_quantity = NULL;
 }
 
 // constructs a Stock with an empty String, the passed in price, and passed in attributes map
@@ -121,7 +118,7 @@ Stock::Stock(double given_price, map<Trader*, int> given_attributes)
 	symbol = "";
 	price = given_price;
 	attributes = given_attributes;
-	max_quantity = rand() % 100 + 1;
+	max_quantity = NULL;
 }
 
 Stock::Stock(string given_symbol, double given_price, map<Trader*, int> given_attributes, int given_max_quantity)
