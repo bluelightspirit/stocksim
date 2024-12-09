@@ -75,15 +75,11 @@ void add_random_stocks_to_stock_market() {
 	newStock1.set_random_price();
 	// set random quantity available
 	newStock1.set_random_max_quantity();
-	// add to attributes map the stock market and how much quantity it has
-	//newStock1.set_attributes_simplified(&the_stock_market, newStock1.get_max_quantity());
 	// give it a random price
 	newStock2.set_random_price();
 	// set random quantity available
 	newStock2.set_random_max_quantity();
-	// set quantity available the stock market has
-	//newStock2.set_attributes_simplified(&the_stock_market, newStock2.get_max_quantity());
-	// add the stocks to the portfolio
+	// add the stocks to the stock market portfolio
 	the_stock_market.add_to_portfolio(newStock1);
 	the_stock_market.add_to_portfolio(newStock2);
 }
@@ -153,9 +149,8 @@ int main()
 					}
 					else {
 						// get new stock from stock market portfolio
-						Stock newStock = the_stock_market.get_from_portfolio(number);
 						// tell trader their balance is too low if their balance is less than the stock price and break out of the buying while loop
-						if (trader.get_balance() < newStock.get_price()) {
+						if (trader.get_balance() < the_stock_market.get_from_portfolio(number).get_price()) {
 							cout << "Your balance is too low to buy this stock! Exiting buying..." << endl;
 							break;
 						}
@@ -170,7 +165,15 @@ int main()
 							break;
 						}
 						// rewrite this to buy here
-						
+						// if stock price mulitplied by desired quantity is less than or equal to trader balance (checked by withdraw boolean), tell user the stock is bought and subtract from their balance
+						if (trader.withdraw(the_stock_market.get_from_portfolio(number).get_price() * quantity) == true) {
+							the_stock_market.change_quantity_from_portfolio_stock(number, the_stock_market.get_from_portfolio(number).get_used_quantity() + quantity);
+
+							// add new stock to trader portfolio (duplicates currently)
+							trader.add_to_portfolio(the_stock_market.get_from_portfolio(number));
+							// show new stock added
+							cout << "--- New Stock Added ---\n" << "Symbol: " << the_stock_market.get_from_portfolio(number).get_symbol() << "\nPrice: $" << the_stock_market.get_from_portfolio(number).get_price() << "\nQuantity Used Overall: " << the_stock_market.get_from_portfolio(number).get_used_quantity() << "\nMax Quantity: " << the_stock_market.get_from_portfolio(number).get_max_quantity() << "\nTotal Price For Max Quantity: $" << the_stock_market.get_from_portfolio(number).get_max_quantity_price() << "\nTotal Price For Current Used Quantity: $" << the_stock_market.get_from_portfolio(number).get_used_quantity_price() << "\n---------------" << endl;
+						}
 					}
 					//	break;
 				}

@@ -130,6 +130,12 @@ void Trader::remove_from_portfolio(int position)
 	portfolio.pop_back();
 }
 
+// change quantity of a portfolio stock
+void Trader::change_quantity_from_portfolio_stock(int position, int given_quantity)
+{
+	portfolio[position].set_used_quantity(given_quantity);
+}
+
 // sell Stock from portfolio vector
 void Trader::sell_from_portfolio(int position)
 {
