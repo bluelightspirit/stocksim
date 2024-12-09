@@ -27,11 +27,12 @@ public:
 	Stock(string given_symbol); // constructs a mostly empty Stock with the passed in symbol, null price, and empty attributes vector
 	Stock(double given_price); // constructs a Stock with an empty string, the passed in price, and empty attributes vector
 	Stock(double given_price, map<Trader*, int> given_attributes); // constructs a Stock with an empty String, the passed in price, and passed in attributes vector
-	Stock(string given_symbol, double given_price, map<Trader*, int> given_attributes, int given_max_quantity); // constructs a Stock given a symbol, attributes, and max quantity all passed in
+	Stock(string given_symbol, double given_price, map<Trader*, int> given_attributes, int given_max_quantity, int given_used_quantity); // constructs a Stock given a symbol, attributes, and max quantity all passed in
 
 private:
 	string symbol; // symbol of Stock can be interpreted like a name (empty string is set if not set)
 	double price; // price of Stock can be interpreted as how much stock is worth (set to null if not set)
 	map<Trader*, int> attributes; // attributes of Stock can be interpreted as a quantity-trader map (empty map is set if not set) - non-pointer Trader gives error to access the map
-	int max_quantity; // max quantity stock can be bought (randomized from 1-100 if not set)
+	int max_quantity; // max quantity stock can be bought (set to null if not set)
+	int current_used_quantity; // current quantity stock being used (default 0)
 };

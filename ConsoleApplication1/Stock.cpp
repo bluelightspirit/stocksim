@@ -104,6 +104,7 @@ Stock::Stock()
 	price = NULL;
 	attributes = map<Trader*, int>();
 	max_quantity = NULL;
+	current_used_quantity = 0;
 }
 
 // constructs a mostly empty Stock with the passed in symbol, null price, and empty attributes vector
@@ -113,6 +114,7 @@ Stock::Stock(string given_symbol)
 	price = NULL;
 	attributes = map<Trader*, int>();
 	max_quantity = NULL;
+	current_used_quantity = 0;
 }
 
 // constructs a Stock with an empty string, the passed in price, and empty attributes map
@@ -122,6 +124,7 @@ Stock::Stock(double given_price)
 	price = given_price;
 	attributes = map<Trader*, int>();
 	max_quantity = NULL;
+	current_used_quantity = 0;
 }
 
 // constructs a Stock with an empty String, the passed in price, and passed in attributes map
@@ -131,12 +134,14 @@ Stock::Stock(double given_price, map<Trader*, int> given_attributes)
 	price = given_price;
 	attributes = given_attributes;
 	max_quantity = NULL;
+	current_used_quantity = 0;
 }
 
-Stock::Stock(string given_symbol, double given_price, map<Trader*, int> given_attributes, int given_max_quantity)
+Stock::Stock(string given_symbol, double given_price, map<Trader*, int> given_attributes, int given_max_quantity, int given_used_quantity)
 {
 	symbol = given_symbol;
 	price = given_price;
 	attributes = given_attributes;
 	max_quantity = given_max_quantity;
+	current_used_quantity = given_used_quantity;
 }
