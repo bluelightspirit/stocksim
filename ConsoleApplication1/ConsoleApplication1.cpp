@@ -45,15 +45,17 @@ void set_randomize_price_multiplier_stock(Stock stock) {
 }
 
 // fluctuate the stock
-void fluctuate_stock(Stock stock) {
+Stock fluctuate_stock(Stock stock) {
 	// if stock attributes string is randomize price multiplier
-	if (stock.get_attributes().find("Randomize Price Multiplier") != stock.get_attributes().end()) {
-		// set price to the randomized multiplier
-		stock.set_price(stock.get_price()*stock.get_attributes()[0]);
-	}
-	else {
-		set_randomize_price_multiplier_stock(stock);
-	}
+	//if (stock.get_attributes().find("Randomize Price Multiplier") != stock.get_attributes().end()) {
+	// randomize price multiplier set
+	set_randomize_price_multiplier_stock(stock);
+	// set price to the randomized multiplier
+	stock.set_price(stock.get_price()*stock.get_attributes()[0]);
+	//}
+	//else {
+	//}
+	return stock;
 }
 
 // fluctuate all stocks
@@ -69,7 +71,7 @@ bool fluctuate_all_stocks(Trader trader) {
 	// if i is >= 0, loop through all stocks in portfolio and set new prices
 	while (i >= 0) {
 		Stock latest = new_portfolio[i];
-		fluctuate_stock(latest);
+		latest = fluctuate_stock(latest);
 		i--;
 	}
 	// set the new portfolio based on fluctuated prices
