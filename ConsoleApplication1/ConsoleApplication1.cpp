@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <stdlib.h>
 #include <unordered_map>
 #include "Stock.h"
 #include "Trader.h"
@@ -56,7 +57,7 @@ bool display_stocks(Trader trader) {
 	// if i is >= 0, print out the stocks to the user until there are no more
 	while (i >= 0) {
 		Stock latest = new_portfolio[i];
-		cout << "--- Stock #" << i+1 << " ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $" << latest.get_price() << "\n---------------" << endl;
+		cout << "--- Stock #" << i+1 << " ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $" << latest.get_price() << "\nQuantity: " << latest.get_attributes_simplified(&trader) << "\n---------------" << endl;
 		i--;
 	}
 	// return true if user has stocks
@@ -68,10 +69,15 @@ void add_random_stocks_to_stock_market() {
 	Stock newStock1("DoStock391");
 	// give it a random price
 	newStock1.set_random_price();
+	// set quantity available the stock market has
+	cout << newStock1.get_max_quantity();
+	newStock1.set_attributes_simplified(&the_stock_market, newStock1.get_max_quantity());
 	// create new stock
 	Stock newStock2("ReStock123");
 	// give it a random price
 	newStock2.set_random_price();
+	// set quantity available the stock market has
+	newStock2.set_attributes_simplified(&the_stock_market, newStock1.get_max_quantity());
 	// add the stocks to the portfolio
 	the_stock_market.add_to_portfolio(newStock1);
 	the_stock_market.add_to_portfolio(newStock2);
@@ -144,7 +150,14 @@ int main()
 						// if stock is less than or equal to trader balance (checked by withdraw boolean), tell user the stock is bought and subtract from their balance
 						Stock newStock = the_stock_market.get_from_portfolio(number);
 						if (trader.withdraw(newStock.get_price()) == true) {
-							cout << "Bought" << endl;
+							cout << "What quantity do you want? " << endl;
+							int quantity;
+							cin >> quantity;
+							cout << endl;
+							// get a pointer based on current trader object
+							Trader* trader_pointer = &trader;
+							// pass on the trader pointer to the set attributes method to add quantity
+							newStock.set_attributes_simplified(trader_pointer, quantity);
 							trader.add_to_portfolio(newStock);
 							// show new stock added
 							vector<Stock> new_portfolio = trader.get_portfolio();
