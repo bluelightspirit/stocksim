@@ -29,7 +29,7 @@ public:
 	bool add_to_portfolio(Stock given_stock); // add Stock to portfolio vector
 	void remove_from_portfolio(int position); // remove Stock from portfolio vector
 	void change_quantity_from_portfolio_stock(int position, int given_quantity); // change quantity of a portfolio stock
-	void sell_from_portfolio(int position); // sell Stock from portfolio vector
+	bool sell_from_portfolio(int position, int given_quantity); // sell Stock from portfolio vector given quantity and position
 	bool withdraw(double amount); // withdraw certain amount of money removing from balance, return true if possible and successful, return false if not possible
 	void deposit(double amount); // deposit certain amount of money adding to balance
 

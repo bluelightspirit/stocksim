@@ -40,6 +40,11 @@ Trader the_stock_market(-1);
 
 // display stocks a trader has in reverse order, return true if there are any, or false if there are none
 bool display_stocks(Trader trader) {
+	// calculate total balance of stocks
+	// used quantity
+	int total_balance_used_quantity = 0;
+	// max quantity
+	int total_balance_max_quantity = 0;
 	// create vector of Stock objects and set it to the trader portfolio
 	vector<Stock> new_portfolio = trader.get_portfolio();
 	// set i maximum based on size of portfolio
@@ -59,9 +64,14 @@ bool display_stocks(Trader trader) {
 	// if i is >= 0, print out the stocks to the user until there are no more
 	while (i >= 0) {
 		Stock latest = new_portfolio[i];
+		total_balance_used_quantity += latest.get_used_quantity_price();
+		total_balance_max_quantity += latest.get_max_quantity_price();
 		cout << "--- Stock #" << i + 1 << " ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $" << latest.get_price() << "\nQuantity Used Overall: " << latest.get_used_quantity() << "\nMax Quantity: " << latest.get_max_quantity() << "\nTotal Price For Max Quantity: $" << latest.get_max_quantity_price() << "\nTotal Price For Current Used Quantity: $" << latest.get_used_quantity_price() << "\n---------------" << endl;
 		i--;
 	}
+	// cout the sum of stocks used and maximum prices
+	cout << "Sum of Stock Used Quantity Prices: $" << total_balance_used_quantity << endl;
+	cout << "Sum of Stock Maximum Quantity Prices: $" << total_balance_max_quantity << endl;
 	
 	// return true if user has stocks
 	return true;
@@ -214,7 +224,7 @@ int main()
 				// take in command from user
 				cin >> number;
 				cout << endl;
-				// if a numebr not 0, buy the stock and add it to portfolio if possible
+				// if a number not 0, buy the stock and add it to portfolio if possible
 				if (number != 0) {
 					// subtract number by 1 as vectors start from 0
 					number--;
@@ -228,8 +238,8 @@ int main()
 							cout << "Your balance is too low to buy this stock! Exiting buying..." << endl;
 							break;
 						}
-						// ask for quantity user wants, asking for >= 0
-						cout << "What quantity do you want?\nQuantity: ";
+						// ask for quantity user wants, asking for > 0 and < quantity you want + max quantity stock supports
+						cout << "What quantity do you want (greater than 0 and less than your quantity you want plus the max quantity the stock supports)?\nQuantity: ";
 						int quantity;
 						cin >> quantity;
 						cout << endl;
@@ -293,12 +303,27 @@ int main()
 					// if number is not 0, subtract the number since the vector starts from 0 then sell that from portfolio.
 					if (number != 0) {
 						number--;
-						trader.sell_from_portfolio(number);
+						// ask for quantity user wants, asking for > 0 and <= overall used quantity
+						cout << "What quantity do you want (greater than 0 and less than or equal to overall used quantity)?\nQuantity: ";
+						int quantity;
+						cin >> quantity;
+						cout << endl;
+						// break out of the selling while loop for asking quantity if it's <= 0
+						if (quantity <= 0) {
+							cout << "Your quantity is less than or equal to 0, which is invalid. Exiting selling stocks..." << endl;
+							break;
+						}
+						// if selling from portfolio is not possible,
+						if (trader.sell_from_portfolio(number, quantity) == false) {
+							// tell user failed to sell quantity from portfolio and exit selling loop
+							cout << "Failed to sell quantity from portfolio, number is higher than the overall used quantity. Exiting selling stocks..." << endl;
+							break;
+						}
 					}
 					// else if number is 0, tell user the program is exiting sell stocks command and exit while loop
 					else {
 						if (number == 0) {
-							cout << "Exiting selling stocks command..." << endl;
+							cout << "Exiting selling stocks..." << endl;
 							break;
 						}
 					}
