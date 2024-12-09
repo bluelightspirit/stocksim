@@ -16,13 +16,13 @@ double Trader::get_balance()
 }
 
 // gets Trader's portfolio
-vector<Stock*> Trader::get_portfolio()
+vector<Stock> Trader::get_portfolio()
 {
 	return portfolio;
 }
 
 // get a Stock from portfolio vector
-Stock* Trader::get_from_portfolio(int position)
+Stock Trader::get_from_portfolio(int position)
 {
 	return portfolio[position];
 }
@@ -42,7 +42,7 @@ void Trader::set_balance(double given_balance)
 }
 
 // sets portfolio of Trader
-void Trader::set_portfolio(vector<Stock*> given_portfolio)
+void Trader::set_portfolio(vector<Stock> given_portfolio)
 {
 	portfolio = given_portfolio;
 }
@@ -54,7 +54,7 @@ Trader::Trader()
 {
 	name = "";
 	balance = NULL;
-	portfolio = vector<Stock*>();
+	portfolio = vector<Stock>();
 }
 
 // constructs Trader with a passed in name, null balance, and empty vector portfolio
@@ -62,7 +62,7 @@ Trader::Trader(string given_name)
 {
 	name = given_name;
 	balance = NULL;
-	portfolio = vector<Stock*>();
+	portfolio = vector<Stock>();
 }
 
 // constructs Trader with just balance passed in
@@ -70,11 +70,11 @@ Trader::Trader(double given_balance)
 {
 	name = "";
 	balance = given_balance;
-	portfolio = vector<Stock*>();
+	portfolio = vector<Stock>();
 }
 
 // constructs Trader with everything passed in: a name, a balance, and a portfolio vector
-Trader::Trader(string given_name, double given_balance, vector<Stock*> given_portfolio)
+Trader::Trader(string given_name, double given_balance, vector<Stock> given_portfolio)
 {
 	name = given_name;
 	balance = given_balance;
@@ -97,7 +97,7 @@ bool Trader::validate_position(int position)
 // adders and removers
 
 // add Stock to portfolio vector if portfolio does not have given stock already
-bool Trader::add_to_portfolio(Stock* given_stock)
+bool Trader::add_to_portfolio(Stock given_stock)
 {
 	// search portfolio
 	int i = 0;
@@ -124,8 +124,8 @@ void Trader::remove_from_portfolio(int position)
 		portfolio.pop_back();
 		return;
 	}
-	Stock* end = portfolio[portfolio.size() - 1];
-	Stock* pos = portfolio[position];
+	Stock end = portfolio[portfolio.size() - 1];
+	Stock pos = portfolio[position];
 	portfolio[position] = end;
 	portfolio.pop_back();
 }
@@ -133,9 +133,7 @@ void Trader::remove_from_portfolio(int position)
 // sell Stock from portfolio vector
 void Trader::sell_from_portfolio(int position)
 {
-	Stock* gotten_stock = get_from_portfolio(position);
-	Stock gotten_stock_dereferenced = *gotten_stock;
-	int stock_cost = gotten_stock_dereferenced.get_price();
+	int stock_cost = get_from_portfolio(position).get_price();
 	remove_from_portfolio(position);
 	balance += stock_cost;
 }

@@ -44,7 +44,7 @@ Stock newStock2("ReStock123");
 // display stocks a trader has in reverse order, return true if there are any, or false if there are none
 bool display_stocks(Trader trader) {
 	// create vector of Stock objects and set it to the trader portfolio
-	vector<Stock*> new_portfolio = trader.get_portfolio();
+	vector<Stock> new_portfolio = trader.get_portfolio();
 	// set i maximum based on size of portfolio
 	int i = new_portfolio.size() - 1;
 	// if i is < 0, tell user or stock market they have no stocks and return false
@@ -63,7 +63,7 @@ bool display_stocks(Trader trader) {
 	if (trader.get_balance() == -1) {
 		// if i is >= 0, print out the stocks to the user until there are no more
 		while (i >= 0) {
-			Stock latest = *new_portfolio[i];
+			Stock latest = new_portfolio[i];
 			cout << "--- Stock #" << i + 1 << " ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $" << latest.get_price() << "\nQuantity: " << latest.get_attributes_simplified(&the_stock_market) << "\n---------------" << endl;
 			i--;
 		}
@@ -72,7 +72,7 @@ bool display_stocks(Trader trader) {
 	else {
 		// if i is >= 0, print out the stocks to the user until there are no more
 		while (i >= 0) {
-			Stock latest = *new_portfolio[i];
+			Stock latest = new_portfolio[i];
 			cout << "--- Stock #" << i + 1 << " ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $" << latest.get_price() << "\nQuantity: " << latest.get_attributes_simplified(&trader) << "\n---------------" << endl;
 			i--;
 		}
@@ -95,8 +95,8 @@ void add_random_stocks_to_stock_market() {
 	// set quantity available the stock market has
 	newStock2.set_attributes_simplified(&the_stock_market, newStock2.get_max_quantity());
 	// add the stocks to the portfolio
-	the_stock_market.add_to_portfolio(&newStock1);
-	the_stock_market.add_to_portfolio(&newStock2);
+	the_stock_market.add_to_portfolio(newStock1);
+	the_stock_market.add_to_portfolio(newStock2);
 }
 
 // display stocks stock market has, and also add new stocks if necessary
@@ -132,7 +132,6 @@ int main()
 	string command;
 	// infinite while loop asking user for commands
 	while (true) {
-
 		// exit if command is E
 		if (command == "E") {
 			exit(0);
@@ -165,7 +164,7 @@ int main()
 					}
 					else {
 						// get new stock from stock market portfolio
-						Stock newStock = *the_stock_market.get_from_portfolio(number);
+						Stock newStock = the_stock_market.get_from_portfolio(number);
 						// tell trader their balance is too low if their balance is less than the stock price and break out of the buying while loop
 						if (trader.get_balance() < newStock.get_price()) {
 							cout << "Your balance is too low to buy this stock! Exiting buying..." << endl;
@@ -189,14 +188,14 @@ int main()
 						// if not ok,
 						if (newStock.set_attributes_simplified(&the_stock_market, newStock.get_attributes_simplified(&the_stock_market) - quantity) == false) {
 							// tell user the stock market does not approve of the quantity
-							cout << "The stock market does not approve of your quantity amount! Choose a whole number greater than 0 and not greater than the quantity the stock market has for the stock (" << newStock.get_attributes_simplified(&the_stock_market) << ")" <<  endl;
+							cout << "The stock market does not approve of your quantity amount! Choose a whole number greater than 0 and not greater than the quantity the stock market has for the stock (" << newStock.get_attributes_simplified(&the_stock_market) << ")" << endl;
 						}
 						// if ok,
 						else {
 							// if stock price mulitplied by desired quantity is less than or equal to trader balance (checked by withdraw boolean), tell user the stock is bought and subtract from their balance
 							if (trader.withdraw(newStock.get_price() * quantity) == true) {
-								vector<Stock*> new_portfolio = trader.get_portfolio();
-								trader.add_to_portfolio(&newStock);
+								vector<Stock> new_portfolio = trader.get_portfolio();
+								trader.add_to_portfolio(newStock);
 								// show changed stock to portfolio if cannot add to portfolio
 								//if (trader.add_to_portfolio(newStock) == false) {
 									// show stock changed (fix this as grabbing latest is prob wrong)
@@ -216,7 +215,7 @@ int main()
 							}
 						}
 					}
-				//	break;
+					//	break;
 				}
 				// else if 0, exit the while loop
 				else {
@@ -296,7 +295,7 @@ int main()
 		}
 		// else if command is Mw,
 		else if (command == "Mw") {
-		// tell user the make a withdrawal command is received
+			// tell user the make a withdrawal command is received
 			cout << "Make a withdrawal received" << endl;
 			// prompt user to enter in the amount they wish to withdraw
 			cout << "Enter in the amount you wish to deposit (decimal numbers are allowed)" << endl;
@@ -342,7 +341,7 @@ int main()
 		}
 	}
 
-	
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

@@ -35,4 +35,3 @@ private:
 	map<Trader*, int> attributes; // attributes of Stock can be interpreted as a quantity-trader map (empty map is set if not set) - non-pointer Trader gives error to access the map
 	int max_quantity; // max quantity stock can be bought (randomized from 1-100 if not set)
 };
-
