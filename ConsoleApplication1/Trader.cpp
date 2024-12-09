@@ -92,6 +92,21 @@ bool Trader::validate_position(int position)
 	}
 }
 
+// find position of a stock in a portfolio
+int Trader::find_position_from_portfolio_stock(string given_symbol)
+{
+	// search portfolio
+	int i = 0;
+	while (i < portfolio.size() - 1) {
+		// return i position if portfolio has given stock already
+		if (portfolio[i].get_symbol() == given_symbol) {
+			return i;
+		}
+		i++;
+	}
+	// return -1 if portfolio does not have given stock already
+	return -1;
+}
 
 
 // adders and removers

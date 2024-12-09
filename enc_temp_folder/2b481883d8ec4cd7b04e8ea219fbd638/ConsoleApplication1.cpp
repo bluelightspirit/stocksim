@@ -170,10 +170,9 @@ int main()
 						if (trader.withdraw(the_stock_market.get_from_portfolio(number).get_price() * quantity) == true) {
 							// get old position of trader stock
 							//trader.find_position_from_portfolio_stock(
-							int old_position_trader = -1;
+							//int old_position_trader = -1;
 							string symbol_from_stock = the_stock_market.get_from_portfolio(number).get_symbol();
-							// find breaks code
-							//int old_position_trader = trader.find_position_from_portfolio_stock(symbol_from_stock);
+							int old_position_trader = trader.find_position_from_portfolio_stock(symbol_from_stock);
 							// if old position is -1 meaning not found,
 							if (old_position_trader == -1) {
 								// change quantity from stock market stock

@@ -23,6 +23,8 @@ public:
 	Trader(string given_name, double given_balance, vector<Stock> given_portfolio); // constructs Trader with everything passed in: a name, a balance, and a portfolio vector
 // validators
 	bool validate_position(int position); // validate position
+// finders
+	int find_position_from_portfolio_stock(string given_symbol); // find position of a stock in a portfolio
 // adders and removers
 	bool add_to_portfolio(Stock given_stock); // add Stock to portfolio vector
 	void remove_from_portfolio(int position); // remove Stock from portfolio vector
