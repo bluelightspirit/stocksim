@@ -132,7 +132,6 @@ int main()
 	string command;
 	// infinite while loop asking user for commands
 	while (true) {
-
 		// exit if command is E
 		if (command == "E") {
 			exit(0);
