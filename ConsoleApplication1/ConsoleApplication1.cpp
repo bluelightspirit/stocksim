@@ -14,6 +14,11 @@ using namespace std;
 // DONE: need global variables for stocks to buy, and access to them (displaying list of available stocks and buying stocks should link up together instead of being different)
 // only the trader has to be global. the stocks within this trader can be local just part of the_stock_market's portfolio
 Trader the_stock_market(-1);
+// create stocks available on stock market
+// create new stock
+Stock newStock1("DoStock391");
+// create new stock
+Stock newStock2("ReStock123");
 
 // need quantity options for stocks
 // need total value for stocks
@@ -77,16 +82,12 @@ bool display_stocks(Trader trader) {
 }
 
 void add_random_stocks_to_stock_market() {
-	// create new stock
-	Stock newStock1("DoStock391");
 	// give it a random price
 	newStock1.set_random_price();
 	// set random quantity available
 	newStock1.set_random_max_quantity();
 	// add to attributes map the stock market and how much quantity it has
 	newStock1.set_attributes_simplified(&the_stock_market, newStock1.get_max_quantity());
-	// create new stock
-	Stock newStock2("ReStock123");
 	// give it a random price
 	newStock2.set_random_price();
 	// set random quantity available
@@ -164,12 +165,17 @@ int main()
 					else {
 						// get new stock from stock market portfolio
 						Stock newStock = the_stock_market.get_from_portfolio(number);
+						// tell trader their balance is too low if their balance is less than the stock price and break out of the buying while loop
+						if (trader.get_balance() < newStock.get_price()) {
+							cout << "Your balance is too low to buy this stock! Exiting buying..." << endl;
+							break;
+						}
 						// ask for quantity user wants, asking for >= 0
 						cout << "What quantity do you want?\nQuantity: ";
 						int quantity;
 						cin >> quantity;
 						cout << endl;
-						// break out of this while loop for asking quantity if it's <= 0
+						// break out of the buying while loop for asking quantity if it's <= 0
 						if (quantity <= 0) {
 							cout << "Your quantity is less than or equal to 0, which is invalid. Exiting buying..." << endl;
 							break;
