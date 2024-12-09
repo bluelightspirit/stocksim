@@ -83,7 +83,6 @@ bool display_stocks(Trader trader) {
 	//if (fluctuate_all_stocks(trader) == false) {
 	//	cout << "no" << endl;
 	//}
-
 	// calculate total balance of stocks
 	// used quantity
 	double total_balance_used_quantity = 0;
