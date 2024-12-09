@@ -15,10 +15,6 @@ using namespace std;
 // only the trader has to be global. the stocks within this trader can be local just part of the_stock_market's portfolio
 Trader the_stock_market(-1);
 // create stocks available on stock market
-// create new stock
-Stock newStock1("DoStock391");
-// create new stock
-Stock newStock2("ReStock123");
 
 // need quantity options for stocks
 // need total value for stocks
@@ -59,41 +55,34 @@ bool display_stocks(Trader trader) {
 		}
 		return false;
 	}
-	// if trader is stock market, get attributes for stock market
-	if (trader.get_balance() == -1) {
-		// if i is >= 0, print out the stocks to the user until there are no more
-		while (i >= 0) {
-			Stock latest = new_portfolio[i];
-			cout << "--- Stock #" << i + 1 << " ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $" << latest.get_price() << "\nQuantity: " << latest.get_attributes_simplified(&the_stock_market) << "\n---------------" << endl;
-			i--;
-		}
+	// if i is >= 0, print out the stocks to the user until there are no more
+	while (i >= 0) {
+		Stock latest = new_portfolio[i];
+		cout << "--- Stock #" << i + 1 << " ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $" << latest.get_price() << "\nQuantity Used Overall: " << latest.get_used_quantity() << "\nMax Quantity: " << latest.get_max_quantity() << "\n---------------" << endl;
+		i--;
 	}
-	// else if trader is not stock market, get attributes for them
-	else {
-		// if i is >= 0, print out the stocks to the user until there are no more
-		while (i >= 0) {
-			Stock latest = new_portfolio[i];
-			cout << "--- Stock #" << i + 1 << " ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $" << latest.get_price() << "\nQuantity: " << latest.get_attributes_simplified(&trader) << "\n---------------" << endl;
-			i--;
-		}
-	}
+	
 	// return true if user has stocks
 	return true;
 }
 
 void add_random_stocks_to_stock_market() {
+	// create new stock
+	Stock newStock1("DoStock391");
+	// create new stock
+	Stock newStock2("ReStock123");
 	// give it a random price
 	newStock1.set_random_price();
 	// set random quantity available
 	newStock1.set_random_max_quantity();
 	// add to attributes map the stock market and how much quantity it has
-	newStock1.set_attributes_simplified(&the_stock_market, newStock1.get_max_quantity());
+	//newStock1.set_attributes_simplified(&the_stock_market, newStock1.get_max_quantity());
 	// give it a random price
 	newStock2.set_random_price();
 	// set random quantity available
 	newStock2.set_random_max_quantity();
 	// set quantity available the stock market has
-	newStock2.set_attributes_simplified(&the_stock_market, newStock2.get_max_quantity());
+	//newStock2.set_attributes_simplified(&the_stock_market, newStock2.get_max_quantity());
 	// add the stocks to the portfolio
 	the_stock_market.add_to_portfolio(newStock1);
 	the_stock_market.add_to_portfolio(newStock2);
@@ -180,40 +169,7 @@ int main()
 							cout << "Your quantity is less than or equal to 0, which is invalid. Exiting buying..." << endl;
 							break;
 						}
-						// get a pointer based on current trader object
-						Trader* trader_pointer = &trader;
-						// pass on the trader pointer to the set attributes method to add quantity
-						newStock.set_attributes_simplified(trader_pointer, quantity);
-						// check if the stock market is ok with quantity subtraction
-						// if not ok,
-						if (newStock.set_attributes_simplified(&the_stock_market, newStock.get_attributes_simplified(&the_stock_market) - quantity) == false) {
-							// tell user the stock market does not approve of the quantity
-							cout << "The stock market does not approve of your quantity amount! Choose a whole number greater than 0 and not greater than the quantity the stock market has for the stock (" << newStock.get_attributes_simplified(&the_stock_market) << ")" << endl;
-						}
-						// if ok,
-						else {
-							// if stock price mulitplied by desired quantity is less than or equal to trader balance (checked by withdraw boolean), tell user the stock is bought and subtract from their balance
-							if (trader.withdraw(newStock.get_price() * quantity) == true) {
-								vector<Stock> new_portfolio = trader.get_portfolio();
-								trader.add_to_portfolio(newStock);
-								// show changed stock to portfolio if cannot add to portfolio
-								//if (trader.add_to_portfolio(newStock) == false) {
-									// show stock changed (fix this as grabbing latest is prob wrong)
-									//Stock latest = new_portfolio[new_portfolio.size() - 1];
-									//cout << "--- Stock Changed ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $ " << latest.get_price() << "\nQuantity: " << latest.get_attributes_simplified(&trader) << endl;
-								//}
-								// show new stock added to portfolio
-								//else {
-									// show new stock added
-									//Stock latest = new_portfolio[new_portfolio.size() - 1];
-									//cout << "--- New Stock Added ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $ " << latest.get_price() << "\nQuantity: " << latest.get_attributes_simplified(&trader) << endl;
-								//}
-							}
-							// if new stock price is greater than trader balance (checked by withdraw boolean), tell user they don't have enough money for this stock
-							else {
-								cout << "You don't have enough money to buy this stock!" << endl;
-							}
-						}
+						// rewrite this to buy here
 					}
 					//	break;
 				}

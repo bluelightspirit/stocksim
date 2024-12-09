@@ -19,7 +19,7 @@ double Stock::get_price()
 }
 
 // gets attributes of Stock
-map<Trader*, int> Stock::get_attributes()
+map<string, int> Stock::get_attributes()
 {
 	return attributes;
 }
@@ -30,10 +30,10 @@ int Stock::get_max_quantity()
 	return max_quantity;
 }
 
-// gets quantity of Stock for a trader (simplified)
-int Stock::get_attributes_simplified(Trader* given_trader)
+// gets used quantity of Stock
+int Stock::get_used_quantity()
 {
-	return attributes.find(given_trader)->second;
+	return current_used_quantity;
 }
 
 // setters
@@ -51,7 +51,7 @@ void Stock::set_price(double given_price)
 }
 
 // sets attributes of Stock (literal)
-void Stock::set_attributes(map<Trader*, int> given_attributes)
+void Stock::set_attributes(map<string, int> given_attributes)
 {
 	attributes = given_attributes;
 }
@@ -74,25 +74,10 @@ void Stock::set_random_max_quantity()
 	set_max_quantity(rand() % 100 + 1);
 }
 
-// sets attributes of Stock (simplified)
-bool Stock::set_attributes_simplified(Trader* given_trader, int given_quantity)
+// sets used quantity of Stock
+void Stock::set_used_quantity(int given_current_used_quantity)
 {
-	// if quantity given is 0 or less, return false for possibility
-	if (given_quantity <= 0) {
-		return false;
-	}
-	// if attributes trying to find given trader results in the end of the map only (meaning not found)
-	if (attributes.find(given_trader) == attributes.end()) {
-		// insert attributes showing given trader and quantity
-		attributes.insert({ given_trader, given_quantity });
-	}
-	// else if trader is found
-	else {
-		// set attributes of given trader to that quantity
-		attributes[given_trader] = given_quantity;
-	}
-	// if quantity given is 0 or more, return true for possibility
-	return true;
+	current_used_quantity = given_current_used_quantity;
 }
 
 // constructors
@@ -102,7 +87,7 @@ Stock::Stock()
 {
 	symbol = "";
 	price = NULL;
-	attributes = map<Trader*, int>();
+	attributes = map<string, int>();
 	max_quantity = NULL;
 	current_used_quantity = 0;
 }
@@ -112,7 +97,7 @@ Stock::Stock(string given_symbol)
 {
 	symbol = given_symbol;
 	price = NULL;
-	attributes = map<Trader*, int>();
+	attributes = map<string, int>();
 	max_quantity = NULL;
 	current_used_quantity = 0;
 }
@@ -122,13 +107,13 @@ Stock::Stock(double given_price)
 {
 	symbol = "";
 	price = given_price;
-	attributes = map<Trader*, int>();
+	attributes = map<string, int>();
 	max_quantity = NULL;
 	current_used_quantity = 0;
 }
 
 // constructs a Stock with an empty String, the passed in price, and passed in attributes map
-Stock::Stock(double given_price, map<Trader*, int> given_attributes)
+Stock::Stock(double given_price, map<string, int> given_attributes)
 {
 	symbol = "";
 	price = given_price;
@@ -137,7 +122,7 @@ Stock::Stock(double given_price, map<Trader*, int> given_attributes)
 	current_used_quantity = 0;
 }
 
-Stock::Stock(string given_symbol, double given_price, map<Trader*, int> given_attributes, int given_max_quantity, int given_used_quantity)
+Stock::Stock(string given_symbol, double given_price, map<string, int> given_attributes, int given_max_quantity, int given_used_quantity)
 {
 	symbol = given_symbol;
 	price = given_price;
