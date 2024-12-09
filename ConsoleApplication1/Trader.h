@@ -24,7 +24,7 @@ public:
 // validators
 	bool validate_position(int position); // validate position
 // adders and removers
-	void add_to_portfolio(Stock given_stock); // add Stock to portfolio vector
+	bool add_to_portfolio(Stock given_stock); // add Stock to portfolio vector
 	void remove_from_portfolio(int position); // remove Stock from portfolio vector
 	void sell_from_portfolio(int position); // sell Stock from portfolio vector
 	bool withdraw(double amount); // withdraw certain amount of money removing from balance, return true if possible and successful, return false if not possible

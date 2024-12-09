@@ -194,12 +194,20 @@ int main()
 						else {
 							// if stock price mulitplied by desired quantity is less than or equal to trader balance (checked by withdraw boolean), tell user the stock is bought and subtract from their balance
 							if (trader.withdraw(newStock.get_price() * quantity) == true) {
-								// show new stock added to portfolio
-								trader.add_to_portfolio(newStock);
-								// show new stock added
 								vector<Stock> new_portfolio = trader.get_portfolio();
-								Stock latest = new_portfolio[new_portfolio.size() - 1];
-								cout << "--- New Stock Added ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $ " << latest.get_price() << "\nQuantity: " << latest.get_attributes_simplified(&trader) << endl;
+								trader.add_to_portfolio(newStock);
+								// show changed stock to portfolio if cannot add to portfolio
+								//if (trader.add_to_portfolio(newStock) == false) {
+									// show stock changed (fix this as grabbing latest is prob wrong)
+									//Stock latest = new_portfolio[new_portfolio.size() - 1];
+									//cout << "--- Stock Changed ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $ " << latest.get_price() << "\nQuantity: " << latest.get_attributes_simplified(&trader) << endl;
+								//}
+								// show new stock added to portfolio
+								//else {
+									// show new stock added
+									//Stock latest = new_portfolio[new_portfolio.size() - 1];
+									//cout << "--- New Stock Added ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $ " << latest.get_price() << "\nQuantity: " << latest.get_attributes_simplified(&trader) << endl;
+								//}
 							}
 							// if new stock price is greater than trader balance (checked by withdraw boolean), tell user they don't have enough money for this stock
 							else {

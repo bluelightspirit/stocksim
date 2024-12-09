@@ -96,10 +96,21 @@ bool Trader::validate_position(int position)
 
 // adders and removers
 
-// add Stock to portfolio vector
-void Trader::add_to_portfolio(Stock given_stock)
+// add Stock to portfolio vector if portfolio does not have given stock already
+bool Trader::add_to_portfolio(Stock given_stock)
 {
+	// search portfolio
+	int i = 0;
+	while (i < portfolio.size() - 1) {
+		// return false if portfolio has given stock already
+		if (&portfolio[i] == &given_stock) {
+			return false;
+		}
+		i++;
+	}
 	portfolio.push_back(given_stock);
+	// return true if portfolio does not have given stock already
+	return true;
 }
 
 // remove Stock from portfolio vector
