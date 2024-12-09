@@ -1,5 +1,6 @@
 #include "Trader.h"
 #include "Stock.h"
+#include <iostream>
 
 // getters
 
@@ -95,9 +96,13 @@ bool Trader::validate_position(int position)
 // find position of a stock in a portfolio
 int Trader::find_position_from_portfolio_stock(string given_symbol)
 {
+	// if portfolio is empty return -1 instantly
+	if (portfolio.size() <= 0) {
+		return -1;
+	}
 	// search portfolio
 	int i = 0;
-	while (i < portfolio.size() - 1) {
+	while (i < portfolio.size()) {
 		// return i position if portfolio has given stock already
 		if (portfolio[i].get_symbol() == given_symbol) {
 			return i;

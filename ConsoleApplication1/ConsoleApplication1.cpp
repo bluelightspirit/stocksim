@@ -68,21 +68,94 @@ bool display_stocks(Trader trader) {
 }
 
 void add_random_stocks_to_stock_market() {
-	// create new stock
-	Stock newStock1("DoStock391");
-	// create new stock
-	Stock newStock2("ReStock123");
-	// give it a random price
-	newStock1.set_random_price();
-	// set random quantity available
-	newStock1.set_random_max_quantity();
-	// give it a random price
-	newStock2.set_random_price();
-	// set random quantity available
-	newStock2.set_random_max_quantity();
-	// add the stocks to the stock market portfolio
-	the_stock_market.add_to_portfolio(newStock1);
-	the_stock_market.add_to_portfolio(newStock2);
+	// initialize random_number_1 to 9
+	int random_number_1 = -1;
+	int random_number_2 = -1;
+	int random_number_3 = -1;
+	int random_number_4 = -1;
+	int random_number_5 = -1;
+	int random_number_6 = -1;
+	int random_number_7 = -1;
+	int random_number_8 = -1;
+	int random_number_9 = -1;
+	int random_number_10 = -1;
+	bool added = false;
+	// loop until added is true
+	while (added == false) {
+		// generate random number
+		random_number_1 = rand() % 10 + 1;
+		// generate random number
+		random_number_2 = rand() % 10 + 1;
+		// generate random number
+		random_number_3 = rand() % 10 + 1;
+		// generate random number
+		random_number_4 = rand() % 10 + 1;
+		// generate random number
+		random_number_5 = rand() % 10 + 1;
+		// generate random number
+		random_number_6 = rand() % 10 + 1;
+		// generate random number
+		random_number_7 = rand() % 10 + 1;
+		// generate random number
+		random_number_8 = rand() % 10 + 1;
+		// generate random number
+		random_number_9 = rand() % 10 + 1;
+		// generate random number
+		random_number_10 = rand() % 10 + 1;
+		// combine numbers in a string
+		string random_numbers = to_string(random_number_1) + to_string(random_number_2) + to_string(random_number_3) + to_string(random_number_4) + to_string(random_number_5) + to_string(random_number_6) + to_string(random_number_7) + to_string(random_number_8) + to_string(random_number_9) + to_string(random_number_10);
+		// create new stock if possible
+		if (the_stock_market.find_position_from_portfolio_stock("DoStock" + random_numbers) == -1) {
+			Stock newStock1("DoStock" + random_numbers);
+			// give it a random price
+			newStock1.set_random_price();
+			// set random quantity available
+			newStock1.set_random_max_quantity();
+			// add it to stock market portfolio
+			the_stock_market.add_to_portfolio(newStock1);
+			// set added to true to escape while loop
+			added = true;
+		}
+	}
+	// set added back to false for next while loop
+	added = false;
+	// loop until added is true
+	while (added == false) {
+		// generate random number
+		random_number_1 = rand() % 10 + 1;
+		// generate random number
+		random_number_2 = rand() % 10 + 1;
+		// generate random number
+		random_number_3 = rand() % 10 + 1;
+		// generate random number
+		random_number_4 = rand() % 10 + 1;
+		// generate random number
+		random_number_5 = rand() % 10 + 1;
+		// generate random number
+		random_number_6 = rand() % 10 + 1;
+		// generate random number
+		random_number_7 = rand() % 10 + 1;
+		// generate random number
+		random_number_8 = rand() % 10 + 1;
+		// generate random number
+		random_number_9 = rand() % 10 + 1;
+		// generate random number
+		random_number_10 = rand() % 10 + 1;
+		// combine numbres in a string
+		string random_numbers = to_string(random_number_1) + to_string(random_number_2) + to_string(random_number_3) + to_string(random_number_4) + to_string(random_number_5) + to_string(random_number_6) + to_string(random_number_7) + to_string(random_number_8) + to_string(random_number_9) + to_string(random_number_10);
+		// create new stock if possible
+		if (the_stock_market.find_position_from_portfolio_stock("ReStock" + random_numbers) == -1) {
+			Stock newStock2("ReStock" + random_numbers);
+			// give it a random price
+			newStock2.set_random_price();
+			// set random quantity available
+			newStock2.set_random_max_quantity();
+			// add the stock to the stock market portfolio
+			the_stock_market.add_to_portfolio(newStock2);
+			// set added to true to escape while loop
+			added = true;
+		}
+	}
 }
 
 // display stocks stock market has, and also add new stocks if necessary
@@ -165,15 +238,18 @@ int main()
 							cout << "Your quantity is less than or equal to 0, which is invalid. Exiting buying..." << endl;
 							break;
 						}
-						// rewrite this to buy here
+						// checks stock max quantity, breaking while loop if quantity exceeds maximum
+						if (quantity + the_stock_market.get_from_portfolio(number).get_used_quantity() > the_stock_market.get_from_portfolio(number).get_max_quantity()) {
+							cout << "Your quantity requested would exceed the max quantity the stock supports! Exiting buying..." << endl;
+							break;
+						}
 						// if stock price mulitplied by desired quantity is less than or equal to trader balance (checked by withdraw boolean), tell user the stock is bought and subtract from their balance
+						// checks trader balance
 						if (trader.withdraw(the_stock_market.get_from_portfolio(number).get_price() * quantity) == true) {
-							// get old position of trader stock
-							//trader.find_position_from_portfolio_stock(
-							int old_position_trader = -1;
+							// get symbol from stock before finding position
 							string symbol_from_stock = the_stock_market.get_from_portfolio(number).get_symbol();
-							// find breaks code
-							//int old_position_trader = trader.find_position_from_portfolio_stock(symbol_from_stock);
+							// get old position of trader stock
+							int old_position_trader = trader.find_position_from_portfolio_stock(symbol_from_stock);
 							// if old position is -1 meaning not found,
 							if (old_position_trader == -1) {
 								// change quantity from stock market stock
