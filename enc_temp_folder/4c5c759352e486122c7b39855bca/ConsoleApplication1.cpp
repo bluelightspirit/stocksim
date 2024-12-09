@@ -16,7 +16,7 @@ using namespace std;
 Trader the_stock_market(-1);
 // create stocks available on stock market
 
-// DONE: need quantity options for stocks
+// need quantity options for stocks - added
 // need total value for stocks
 // need stock price simulation to fluctuate prices of stocks over time - attributes string int could be good for this such as doubling randomness or halving randomness
 // PARTIALLY DONE: need selling stock to add to balance
@@ -58,7 +58,7 @@ bool display_stocks(Trader trader) {
 	// if i is >= 0, print out the stocks to the user until there are no more
 	while (i >= 0) {
 		Stock latest = new_portfolio[i];
-		cout << "--- Stock #" << i + 1 << " ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $" << latest.get_price() << "\nQuantity Used Overall: " << latest.get_used_quantity() << "\nMax Quantity: " << latest.get_max_quantity() << "\nTotal Price For Max Quantity: $" << latest.get_max_quantity_price() << "\nTotal Price For Current Used Quantity: $" << latest.get_used_quantity_price() << "\n---------------" << endl;
+		cout << "--- Stock #" << i + 1 << " ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $" << latest.get_price() << "\nQuantity Used Overall: " << latest.get_used_quantity() << "\nMax Quantity: " << latest.get_max_quantity() << "\nTotal Price For Max Quantity: " << latest.get_max_quantity_price() << "\nTotal Price For Current Used Quantity: " << latest.get_used_quantity_price() << "\n---------------" << endl;
 		i--;
 	}
 	
@@ -170,7 +170,6 @@ int main()
 							break;
 						}
 						// rewrite this to buy here
-						
 					}
 					//	break;
 				}

@@ -14,6 +14,8 @@ public:
 	map<string, int> get_attributes(); // gets attributes of Stock
 	int get_max_quantity(); // gets max quantity of Stock
 	int get_used_quantity(); // gets current used quantity of Stock
+	double get_used_quantity_price(); // gets price based on current used quantity
+	double get_max_quantity_price(); // gets price based on max quantity
 	// setters
 	void set_symbol(string given_symbol); // sets symbol of Stock
 	void set_price(double given_price); // sets price of Stock

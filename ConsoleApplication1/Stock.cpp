@@ -36,6 +36,18 @@ int Stock::get_used_quantity()
 	return current_used_quantity;
 }
 
+// gets price based on current used quantity
+double Stock::get_used_quantity_price()
+{
+	return current_used_quantity*price;
+}
+
+// gets price based on max quantity
+double Stock::get_max_quantity_price()
+{
+	return max_quantity*price;
+}
+
 // setters
 
 // sets symbol of Stock
