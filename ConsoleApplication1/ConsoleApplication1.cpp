@@ -54,11 +54,23 @@ bool display_stocks(Trader trader) {
 		}
 		return false;
 	}
-	// if i is >= 0, print out the stocks to the user until there are no more
-	while (i >= 0) {
-		Stock latest = new_portfolio[i];
-		cout << "--- Stock #" << i+1 << " ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $" << latest.get_price() << "\nQuantity: " << latest.get_attributes_simplified(&trader) << "\n---------------" << endl;
-		i--;
+	// if trader is stock market, get attributes for stock market
+	if (trader.get_balance() == -1) {
+		// if i is >= 0, print out the stocks to the user until there are no more
+		while (i >= 0) {
+			Stock latest = new_portfolio[i];
+			cout << "--- Stock #" << i + 1 << " ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $" << latest.get_price() << "\nQuantity: " << latest.get_attributes_simplified(&the_stock_market) << "\n---------------" << endl;
+			i--;
+		}
+	}
+	// else if trader is not stock market, get attributes for them
+	else {
+		// if i is >= 0, print out the stocks to the user until there are no more
+		while (i >= 0) {
+			Stock latest = new_portfolio[i];
+			cout << "--- Stock #" << i + 1 << " ---\n" << "Symbol: " << latest.get_symbol() << "\nPrice: $" << latest.get_price() << "\nQuantity: " << latest.get_attributes_simplified(&trader) << "\n---------------" << endl;
+			i--;
+		}
 	}
 	// return true if user has stocks
 	return true;
@@ -79,9 +91,9 @@ void add_random_stocks_to_stock_market() {
 	// give it a random price
 	newStock2.set_random_price();
 	// set random quantity available
-	newStock2.set_max_quantity(rand() % 100 + 1);
+	newStock2.set_random_max_quantity();
 	// set quantity available the stock market has
-	newStock2.set_attributes_simplified(&the_stock_market, newStock1.get_max_quantity());
+	newStock2.set_attributes_simplified(&the_stock_market, newStock2.get_max_quantity());
 	// add the stocks to the portfolio
 	the_stock_market.add_to_portfolio(newStock1);
 	the_stock_market.add_to_portfolio(newStock2);
