@@ -70,7 +70,7 @@ void add_random_stocks_to_stock_market() {
 	// give it a random price
 	newStock1.set_random_price();
 	// set random quantity available
-	newStock1.set_max_quantity(2);
+	newStock1.set_random_max_quantity();
 	cout << newStock1.get_max_quantity();
 	// add to attributes map the stock market and how much quantity it has
 	newStock1.set_attributes_simplified(&the_stock_market, newStock1.get_max_quantity());
