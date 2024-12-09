@@ -21,7 +21,7 @@ public:
 	void set_random_price(); // sets random price of Stock
 	void set_max_quantity(int given_max_quantity); // sets max quantity of stock
 	void set_random_max_quantity(); // sets random max quantity of stock
-	void set_attributes_simplified(Trader* given_trader, int given_quantity); // sets attributes of Stock (simplified)
+	bool set_attributes_simplified(Trader* given_trader, int given_quantity); // sets attributes of Stock (simplified)
 	// constructors
 	Stock(); // constructs an empty Stock with a null price, empty string, and empty attributes vector
 	Stock(string given_symbol); // constructs a mostly empty Stock with the passed in symbol, null price, and empty attributes vector

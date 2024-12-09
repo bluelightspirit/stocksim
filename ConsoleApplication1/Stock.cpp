@@ -75,8 +75,12 @@ void Stock::set_random_max_quantity()
 }
 
 // sets attributes of Stock (simplified)
-void Stock::set_attributes_simplified(Trader* given_trader, int given_quantity)
+bool Stock::set_attributes_simplified(Trader* given_trader, int given_quantity)
 {
+	// if quantity given is 0 or less, return false for possibility
+	if (given_quantity <= 0) {
+		return false;
+	}
 	// if attributes trying to find given trader results in the end of the map only (meaning not found)
 	if (attributes.find(given_trader) == attributes.end()) {
 		// insert attributes showing given trader and quantity
@@ -87,6 +91,8 @@ void Stock::set_attributes_simplified(Trader* given_trader, int given_quantity)
 		// set attributes of given trader to that quantity
 		attributes[given_trader] = given_quantity;
 	}
+	// if quantity given is 0 or more, return true for possibility
+	return true;
 }
 
 // constructors

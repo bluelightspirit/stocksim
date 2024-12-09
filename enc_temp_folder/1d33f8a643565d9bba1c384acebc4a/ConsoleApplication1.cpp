@@ -180,9 +180,10 @@ int main()
 						newStock.set_attributes_simplified(trader_pointer, quantity);
 						// check if the stock market is ok with quantity subtraction
 						// if not ok,
+						cout << "test:" << newStock.get_attributes_simplified(&the_stock_market) - quantity << endl;
 						if (newStock.set_attributes_simplified(&the_stock_market, newStock.get_attributes_simplified(&the_stock_market) - quantity) == false) {
 							// tell user the stock market does not approve of the quantity
-							cout << "The stock market does not approve of your quantity amount! Choose a whole number greater than 0 and not greater than the quantity the stock market has for the stock (" << newStock.get_attributes_simplified(&the_stock_market) << ")" <<  endl;
+							cout << "The stock market does not approve of your quantity amount! Choose greater than 0 and not greater than the quantity the stock market has for the stock (" << newStock.get_attributes_simplified(&the_stock_market) << ")" <<  endl;
 						}
 						// if ok,
 						else {
