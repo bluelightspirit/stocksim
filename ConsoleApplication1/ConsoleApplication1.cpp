@@ -230,18 +230,15 @@ void add_random_stocks_to_stock_market() {
 
 // display stocks stock market has, and also add new stocks if necessary
 void display_stock_market_stocks() {
-	// if display stocks for stock market is false,
 	if (display_stocks(the_stock_market) == false) {
-		// ad more stocks to stock market
 		cout << "Adding more stocks to the stock market..." << endl;
 		add_random_stocks_to_stock_market();
 		cout << "Stocks added!" << endl;
-		// then redisplay stocks for stock market
 		display_stocks(the_stock_market);
 	}
 }
 
-// main method to run command prompt for now. 
+// main method to run command prompt for now. maybe not allowed for HCI so is temporary for now, but good start?
 int main()
 {
 	// store traders name

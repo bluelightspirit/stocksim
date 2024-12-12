@@ -82,9 +82,9 @@ bool fluctuate_all_stocks(Trader trader) {
 // display stocks a trader has in reverse order, return true if there are any, or false if there are none
 bool display_stocks(Trader trader) {
 	// fluctuate the stocks (in interest of time, this will not be implemented)
-	//if (fluctuate_all_stocks(trader) == false) {
-	//	cout << "no" << endl;
-	//}
+	if (fluctuate_all_stocks(trader) == false) {
+		cout << "no" << endl;
+	}
 
 	// calculate total balance of stocks
 	// used quantity
