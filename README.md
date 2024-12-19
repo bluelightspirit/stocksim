@@ -24,25 +24,6 @@ Press "URL", select a directory and take note of that directory, then click the 
 
 Navigate to the directory you cloned with the note you have. Open that folder, which should have ConsoleApplication1.sln in it. Once you are in the folder that has this file, open the x64 folder. Then, open the Release folder. Finally, run ConsoleApplication1.exe - this will work versus running it in Visual Studio consistently in my tests.
 
-## The setup below will not work 
-#### ... unless you try to mess with Visual Studio built files. Certain files allow the program to compile on my (bluelightspirit) computer without errors and without showing the old version of the code. Visual Studio is extremely picky. For a guess, I tried to read some of the files such as .suo in the .vs directory. Some directories may be vital for the program to run... and I've gotten the program to compile with that .suo file in the same directory shared through OneDrive. Cloning from GitHub though? Gives me an old version of the simulator. Why? Well, maybe one day I (bluelightspirit) can find out after taking Operating Systems...
-
-After that, press "File" at the top left, hover over "Open", then press "Project/Solution..."
-
-![image](https://github.com/user-attachments/assets/abc46549-b392-43d4-9145-e770ff5baf9a)
-
-Then, locate the directory you took note of the previous step, open that folder, then open the .sln file.
-
-![image](https://github.com/user-attachments/assets/5cf46912-24f5-4ba1-aea2-423082a51ec2)
-
-After that, press "Local Windows Debugger" at the top middle of Visual Studio.
-
-![image](https://github.com/user-attachments/assets/4c155a50-3775-498a-942e-c5b8c4b26e1c)
-
-Lastly, locate your command prompt popup and open it which should display something like this:
-
-![image](https://github.com/user-attachments/assets/8dcba8e9-ce53-4cc0-8b8e-71c47d7ee12d)
-
 ## Usage
 To use the stock market simulator, type in a name, then it gives you commands to use and has decent guidance to help you out. Just follow exactly what the instructions say and do not enter in non-integers when a whole number is requested.
 
