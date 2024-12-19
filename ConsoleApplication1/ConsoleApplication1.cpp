@@ -132,7 +132,7 @@ bool display_stocks(Trader trader) {
 	// cout the sum of stocks used and maximum prices
 	cout << "Sum of Stock Used Quantity Prices: $" << total_balance_used_quantity << endl;
 	cout << "Sum of Stock Maximum Quantity Prices: $" << total_balance_max_quantity << endl;
-	
+
 	// return true if user has stocks
 	return true;
 }
