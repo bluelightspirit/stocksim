@@ -1,13 +1,13 @@
 ﻿  ConsoleApplication1.cpp
-d:\c++\consoleapplication1_1\consoleapplication1\consoleapplication1.cpp(66): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-d:\c++\consoleapplication1_1\consoleapplication1\consoleapplication1.cpp(99): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\bluel\onedrive - university of mary washington\vs17 try\consoleapplication1\consoleapplication1.cpp(66): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\bluel\onedrive - university of mary washington\vs17 try\consoleapplication1\consoleapplication1.cpp(99): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   Stock.cpp
   Trader.cpp
-d:\c++\consoleapplication1_1\consoleapplication1\trader.cpp(170): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\c++\consoleapplication1_1\consoleapplication1\trader.cpp(194): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\bluel\onedrive - university of mary washington\vs17 try\consoleapplication1\trader.cpp(170): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\bluel\onedrive - university of mary washington\vs17 try\consoleapplication1\trader.cpp(194): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   Generating code
   416 of 421 functions (98.8%) were compiled, the rest were copied from previous compilation.
     2 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  ConsoleApplication1.vcxproj -> D:\c++\ConsoleApplication1_1\x64\Release\ConsoleApplication1.exe
+  ConsoleApplication1.vcxproj -> C:\Users\bluel\OneDrive - University of Mary Washington\vs17 try\x64\Release\ConsoleApplication1.exe
