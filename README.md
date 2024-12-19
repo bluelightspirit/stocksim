@@ -37,7 +37,7 @@ Lastly, locate your command prompt popup and open it which should display someth
 ![image](https://github.com/user-attachments/assets/8dcba8e9-ce53-4cc0-8b8e-71c47d7ee12d)
 
 ## Usage
-To use the stock market simulator, type in a name, then it gives you commands to use and has decent guidance to help you out, though is still in progress.
+To use the stock market simulator, type in a name, then it gives you commands to use and has decent guidance to help you out. Just follow exactly what the instructions say and do not enter in non-integers when a whole number is requested.
 
 ![image](https://github.com/user-attachments/assets/e82f828f-7d4f-4183-a859-97caea366056)
 
