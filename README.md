@@ -1,6 +1,4 @@
 # ConsoleApplication1
-## The setup below will not work 
-#### ... unless you try to mess with Visual Studio built files. Certain files allow the program to compile on my (bluelightspirit) computer without errors and without showing the old version of the code. Visual Studio is extremely picky. For a guess, I tried to read some of the files such as .suo in the .vs directory. Some directories may be vital for the program to run... and I've gotten the program to compile with that .suo file in the same directory shared through OneDrive. Cloning from GitHub though? Gives me an old version of the simulator. Why? Well, maybe one day I (bluelightspirit) can find out after taking Operating Systems...
 ## Expected Setup
 To setup, use [Visual Studio 2017](https://aka.ms/vs/15/release/vs_community.exe) as that is what was used to code this project. Windows 10 and 11 were tested for this. Be sure "Desktop development with C++", "Git for windows" and "GitHub extension for Visual Studio" is check marked and downloaded inside Visual Studio 2017, like the image below:
 ![image](https://github.com/user-attachments/assets/dd559592-a8fd-4f7d-a979-0c8ccf840037)
@@ -21,6 +19,13 @@ Then, at the top left again, press "File", hover over "Open", then press "Open f
 Press "URL", select a directory and take note of that directory, then click the popup text box and in it, type in or paste "https://github.com/bluelightspirit/ConsoleApplication1" then after it is typed in, Press "Clone" at the bottom like this:
 
 ![image](https://github.com/user-attachments/assets/4b24fea1-6452-473f-b3f8-91b8040b2aaf)
+
+## NEW STEPS
+
+Navigate to the directory you cloned with the note you have. Open that folder, which should have ConsoleApplication1.sln in it. Once you are in the folder that has this file, open the x64 folder. Then, open the Release folder. Finally, run ConsoleApplication1.exe - this will work versus running it in Visual Studio consistently in my tests.
+
+## The setup below will not work 
+#### ... unless you try to mess with Visual Studio built files. Certain files allow the program to compile on my (bluelightspirit) computer without errors and without showing the old version of the code. Visual Studio is extremely picky. For a guess, I tried to read some of the files such as .suo in the .vs directory. Some directories may be vital for the program to run... and I've gotten the program to compile with that .suo file in the same directory shared through OneDrive. Cloning from GitHub though? Gives me an old version of the simulator. Why? Well, maybe one day I (bluelightspirit) can find out after taking Operating Systems...
 
 After that, press "File" at the top left, hover over "Open", then press "Project/Solution..."
 
