@@ -1,4 +1,4 @@
-# ConsoleApplication1
+# Stock Market Simulation System
 ## Expected Setup
 To setup, use [Visual Studio 2017](https://aka.ms/vs/15/release/vs_community.exe) as that is what was used to code this project. Windows 10 and 11 were tested for this. Be sure "Desktop development with C++", "Git for windows" and "GitHub extension for Visual Studio" is check marked and downloaded inside Visual Studio 2017, like the image below:
 ![image](https://github.com/user-attachments/assets/dd559592-a8fd-4f7d-a979-0c8ccf840037)
