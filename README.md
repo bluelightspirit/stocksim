@@ -16,7 +16,7 @@ Then, at the top left again, press "File", hover over "Open", then press "Open f
 
 ![image](https://github.com/user-attachments/assets/8e3e2a72-0f21-4c42-adeb-2f8099ac75a7)
 
-Press "URL", select a directory and take note of that directory, then click the popup text box and in it, type in or paste "https://github.com/bluelightspirit/ConsoleApplication1" then after it is typed in, Press "Clone" at the bottom like this:
+Press "URL", select a directory and take note of that directory, then click the popup text box and in it, type in or paste "https://github.com/bluelightspirit/stocksim" then after it is typed in, Press "Clone" at the bottom like this:
 
 ![image](https://github.com/user-attachments/assets/4b24fea1-6452-473f-b3f8-91b8040b2aaf)
 
